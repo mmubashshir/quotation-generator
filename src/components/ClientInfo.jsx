@@ -11,8 +11,8 @@ const ClientInfo = () => {
       </section>
       <section className="flex flex-col mb-4" id="client-details">
         <h3 className="text-xl font-medium mb-2">Details</h3>
-        <div className="flex gap-2">
-          <div className="flex flex-col w-1/2">
+        <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col w-full md:w-1/2">
             <label className="font-normal" htmlFor="name">
               Client Name
             </label>
@@ -25,7 +25,7 @@ const ClientInfo = () => {
               type="text"
             />
           </div>
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-full md:w-1/2">
             <label className=" font-normal" htmlFor="email">
               Email
             </label>

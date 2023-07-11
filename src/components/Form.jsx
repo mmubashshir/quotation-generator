@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 const Form = () => {
   const store = useStore((state) => state);
   return (<>
-    <main className=" bg-white p-8 rounded-xl">
+    <main className=" bg-white p-8 lg:mx-[20%] rounded-xl drop-shadow-lg">
       <ClientInfo />
       <Items />
       <div className="flex justify-end mt-4" id="submit">
         <button
           type="button"
-          className="inline-flex float-right items-center px-4 py-3 font-semibold leading-6 text-sm shadow rounded-xl text-white bg-[#1453ff] hover:bg-opacity-90 "
+          className="drop-shadow-xl inline-flex float-right items-center px-4 py-3 font-semibold leading-6 text-sm shadow rounded-xl text-white bg-[#1453ff] hover:bg-opacity-90 "
           disabled=""
         >
           <svg
