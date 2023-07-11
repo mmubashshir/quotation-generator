@@ -48,7 +48,7 @@ const Form = () => {
             {({ blob, url }) => (
               <Link
                 to={url}
-                download="Example-PDF"
+                download="Example-PDF.pdf"
                 target="_blank"
                 rel="noreferrer">
                   Download PDF
