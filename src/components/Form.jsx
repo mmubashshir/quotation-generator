@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Form = () => {
   const store = useStore((state) => state);
   return (<>
-    <main className=" bg-white p-8 lg:mx-[20%] rounded-xl drop-shadow-lg">
+    <main className=" bg-white p-8 sm:mx-[10%] lg:mx-[20%] xl:mx-[25%] rounded-xl drop-shadow-lg">
       <ClientInfo />
       <Items />
       <div className="flex justify-end mt-4" id="submit">
