@@ -3,6 +3,7 @@ import useStore from "../store";
 import PDFFile from "./PDFFile";
 import ClientInfo from "./ClientInfo";
 import Items from "./Items";
+import { Link } from "react-router-dom";
 const Form = () => {
   const store = useStore((state) => state)
   const printInfo = () => console.log(store.clientInfo)
@@ -44,15 +45,19 @@ const Form = () => {
             ></path>
           </svg>
           <BlobProvider document={<PDFFile pdfData={store} />}>
-          {({ blob, url }) => (
-            <a href={url} download="test.pdf">
-              Download
-            </a>
-          )}
-        </BlobProvider>
-            {/* <a href={instance.url} download="test.pdf">
-              Download
-            </a> */}
+            {({ blob, url }) => (
+              <Link
+                to={url}
+                download="Example-PDF"
+                target="_blank"
+                rel="noreferrer"
+                val>
+                  Download PDF
+                </Link>
+
+            )}
+          </BlobProvider>
+
         </button>
       </div>
     </main>
