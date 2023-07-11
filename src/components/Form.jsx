@@ -50,8 +50,7 @@ const Form = () => {
                 to={url}
                 download="Example-PDF"
                 target="_blank"
-                rel="noreferrer"
-                val>
+                rel="noreferrer">
                   Download PDF
                 </Link>
 
