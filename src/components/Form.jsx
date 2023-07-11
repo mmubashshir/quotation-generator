@@ -5,20 +5,13 @@ import ClientInfo from "./ClientInfo";
 import Items from "./Items";
 import { Link } from "react-router-dom";
 const Form = () => {
-  const store = useStore((state) => state)
-  const printInfo = () => console.log(store.clientInfo)
-  const [instance, updateInstance] = usePDF({ document: <PDFFile pdfData={store} /> });
-
-  // if (instance.loading) return <div>Loading ...</div>;
-
-  // if (instance.error) return <div>Something went wrong: {error}</div>;
+  const store = useStore((state) => state);
   return (<>
     <main className=" bg-white p-8 rounded-xl">
       <ClientInfo />
       <Items />
       <div className="flex justify-end mt-4" id="submit">
         <button
-          onClick={printInfo}
           type="button"
           className="inline-flex float-right items-center px-4 py-3 font-semibold leading-6 text-sm shadow rounded-xl text-white bg-[#1453ff] hover:bg-opacity-90 "
           disabled=""

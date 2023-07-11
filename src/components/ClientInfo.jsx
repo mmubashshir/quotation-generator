@@ -1,6 +1,5 @@
 import useStore from "../store";
 const ClientInfo = () => {
-  const date = new Date();
   const store = useStore((state) => state);
   return (
     <>
