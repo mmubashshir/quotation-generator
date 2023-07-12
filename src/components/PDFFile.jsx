@@ -182,7 +182,7 @@ const PDFFile = ({ pdfData }) => {
         <View style={styles.table}>
           <View style={[styles.tableRow, styles.tableHeader]}>
           <View style={styles.snoCol}>
-              <Text style={styles.headerCell}>SNO</Text>
+              <Text style={styles.headerCell}>Sno</Text>
             </View>
             <View style={styles.firstCol}>
               <Text style={styles.headerCell}>Product</Text>
