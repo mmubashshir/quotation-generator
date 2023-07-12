@@ -56,12 +56,14 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     paddingBottom: 0,
-    marginTop: '55mm',
+    marginTop: '50mm',
     fontFamily: "Inter",
+    
   },
   quotationReference: {
     flex: 1,
-    gap: 20,
+    // gap: 20,
+    marginLeft: "15mm",
     marginBottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -73,18 +75,18 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   dateOfIssue: {
+    paddingRight: "10mm"
   },
   customerDetails: {
+    
     maxHeight: 150,
     flex: 1,
   },
-  customerName: {
-    marginLeft: "20mm"
-  },
   heading: {
     fontFamily: "Inter",
-    fontSize: 28,
+    fontSize: 16,
     fontWeight: "600",
+    textAlign: "center"
   },
   table: {
     display: "table",
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center"
   },
-  snoCol:{
+  snoCol: {
     width: "6%"
   },
   firstCol: {
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     textAlign: "center"
   },
-  rightAlignedCell :{
+  rightAlignedCell: {
     textAlign: "right",
   },
   hline: {
@@ -150,8 +152,8 @@ const styles = StyleSheet.create({
     border: "none"
   },
   tcContainer: {
-    position:"absolute",
-    flex:1,
+    position: "absolute",
+    flex: 1,
     bottom: 200,
     left: 20,
     fontSize: 10,
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
   tcHead: {
     fontWeight: "600"
   },
-  tc:{
+  tc: {
     flex: 1,
     flexDirection: "column"
   },
@@ -168,20 +170,22 @@ const styles = StyleSheet.create({
 
 const PDFFile = ({ pdfData }) => {
   const { name, email, title, date, address } = pdfData.clientInfo;
-  const {subtotal, gst, grandTotal} = pdfData;
+  const { subtotal, gst, grandTotal } = pdfData;
   const items = pdfData.items;
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
+      <Text style={styles.heading}>Quotation</Text>
         <View style={styles.quotationReference}>
-           <View style={styles.customerDetails}>
-            <Text>{name}</Text>
-            <Text>{address}</Text>
+          <View style={styles.customerDetails}>
+            <Text>Sharadha Vidhyanikethana{name}</Text>
+            <Text>KCRoad{"\n"}
+              Mangalore {address}</Text>
           </View><Text style={styles.dateOfIssue}>{date}</Text>
         </View>
         <View style={styles.table}>
           <View style={[styles.tableRow, styles.tableHeader]}>
-          <View style={styles.snoCol}>
+            <View style={styles.snoCol}>
               <Text style={styles.headerCell}>Sno</Text>
             </View>
             <View style={styles.firstCol}>
@@ -200,9 +204,9 @@ const PDFFile = ({ pdfData }) => {
           {items.map((item, index) => (
             <>
               <View style={styles.tableRow}>
-              <View style={styles.snoCol}>
+                <View style={styles.snoCol}>
                   <Text style={styles.tableCell}>
-                    {index+1}
+                    {index + 1}
                   </Text>
                 </View>
                 <View style={styles.firstCol}>
@@ -217,7 +221,7 @@ const PDFFile = ({ pdfData }) => {
                   <Text style={styles.tableCell}>{item.qty}</Text>
                 </View>
                 <View style={styles.tableCol}>
-                  <Text style={[styles.tableCell,styles.rightAlignedCell]}>₹{item.totalPrice}</Text>
+                  <Text style={[styles.tableCell, styles.rightAlignedCell]}>₹{item.totalPrice}</Text>
                 </View>
               </View>
               <View style={styles.hline}></View>
@@ -240,12 +244,12 @@ const PDFFile = ({ pdfData }) => {
         </View>
 
         <View style={styles.tcContainer}>
-            <Text style={styles.tcHead}>Terms & Conditions</Text>
-            <View style={styles.tc}>
-              <Text>• Above Information is not an invoice and only an estimate of goods/services</Text>
-              <Text>• Payment will be due prior to provision or delivery of goods/services</Text>
-              <Text>• Rates applicable on road transportation are charged extra</Text>
-            </View>
+          <Text style={styles.tcHead}>Terms & Conditions</Text>
+          <View style={styles.tc}>
+            <Text>• Above Information is not an invoice and only an estimate of goods/services</Text>
+            <Text>• Payment will be due prior to provision or delivery of goods/services</Text>
+            <Text>• Rates applicable on road transportation are charged extra</Text>
+          </View>
         </View>
       </Page>
     </Document>
