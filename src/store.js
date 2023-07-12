@@ -19,7 +19,7 @@ const removeItem = (items, id) => {
 const handleItemInputChange = (prevData, id, field, value) => {
     return prevData.map((item) => {
         const updatedItem = item.id === id ? { ...item, [field]: value } : item
-        const resultItem = { ...updatedItem, totalPrice: updatedItem.price * updatedItem.qty };
+        const resultItem = { ...updatedItem, totalPrice: (updatedItem.price * updatedItem.qty).toFixed(2) };
         return resultItem
     })
 };
@@ -64,7 +64,7 @@ const calculateTotal = (items) => {
 const useStore = create(
     (set) => ({
         // Only for Item State Management        
-        items: [{ id: crypto.randomUUID(), itemName: "", price: "", qty: "", totalPrice: 0 }],
+        items: [{ id: crypto.randomUUID(), itemName: "", price: 0, qty: 0, totalPrice: 0 }],
         addItem: () => set((state) => {
             const updatedItems = addItem(state.items);
             const { subtotal, gst, grandTotal} = calculateTotal(updatedItems);

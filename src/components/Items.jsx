@@ -4,13 +4,6 @@ import useStore from "../store";
 
 const Items = () => {
   const store = useStore((state) => state)
-  // const { subtotal, gst, grandTotal, calculateTotal } = useStore();
-
-  // useEffect(() => {
-  //   calculateTotal(); // Trigger calculateTotal action on component mount or when items change
-  // }, [calculateTotal]);
-
-  let totalAmount = store.items.reduce((totalSum, item) => totalSum + item.totalPrice, 0)
   return (
     <>
       <section className="flex flex-col" id="quotation-items">
@@ -34,7 +27,7 @@ const Items = () => {
                   name="itemName"
                   type="text"
                   value={item.itemName}
-                  placeholder={`Item ${index}`}
+                  placeholder={`Item ${index + 1}`}
                   onChange={(e) =>
                     store.handleItemInputChange(item.id, "itemName", e.target.value)
                   }
@@ -42,8 +35,8 @@ const Items = () => {
                 <input
                   className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="price"
-                  value={item.price}
-                  type="text"
+                  value={(item.price === 0 ) ? "" : item.price}
+                  type="number"
                   placeholder="₹100"
                   onChange={(e) =>
                     store.handleItemInputChange(item.id, "price", e.target.value)
@@ -52,8 +45,8 @@ const Items = () => {
                 <input
                   className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="qty"
-                  type="text"
-                  value={item.qty}
+                  type="number"
+                  value={(item.qty === 0) ? "" : item.qty}
                   placeholder="1"
                   onChange={(e) =>
                     store.handleItemInputChange(item.id, "qty", e.target.value)
@@ -62,12 +55,9 @@ const Items = () => {
                 <input
                   className="text-sm text-opacity-75 mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="total"
-                  type="text"
-                  value={item.price * item.qty}
+                  type="number"
+                  value={(item.price * item.qty === 0 ) ? "" : (item.price * item.qty).toFixed(2) }
                   placeholder="₹100"
-                  // onChange={(e) =>
-                  //   store.handleItemInputChange(item.id, "totalPrice", item.price * item.qty)
-                  // }
                   readOnly
                   required />
                 <button

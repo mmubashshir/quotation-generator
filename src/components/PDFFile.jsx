@@ -2,7 +2,6 @@ import React from "react";
 import {
   Page,
   Text,
-  Image,
   View,
   Document,
   StyleSheet,
@@ -57,7 +56,6 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     paddingBottom: 0,
-    // textAlign: "justify",
     marginTop: '55mm',
     fontFamily: "Inter",
   },
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     maxHeight: 60,
     fontSize: 14
-    // alignItems: "center"
   },
   quotationNumber: {
     fontSize: 28,
@@ -80,9 +77,6 @@ const styles = StyleSheet.create({
   customerDetails: {
     maxHeight: 150,
     flex: 1,
-
-    // gap: 5,
-    // marginBottom: 25,
   },
   customerName: {
     marginLeft: "20mm"
@@ -99,17 +93,24 @@ const styles = StyleSheet.create({
   tableRow: {
     margin: "auto",
     flexDirection: "row",
+    alignItems: "center"
+  },
+  snoCol:{
+    width: "6%"
   },
   firstCol: {
-    width: "49%",
+    width: "43%",
   },
   tableCol: {
     width: "17%",
   },
   tableCell: {
-    margin: "auto",
     paddingVertical: 10,
-    fontSize: 12,
+    fontSize: 11,
+    textAlign: "center"
+  },
+  rightAlignedCell :{
+    textAlign: "right",
   },
   hline: {
     width: "100%",
@@ -128,23 +129,18 @@ const styles = StyleSheet.create({
     margin: "auto",
     fontSize: 12
   },
-  body: {
-    fontSize: 16,
-  },
   summaryContainer: {
-    fontSize: 14,
+    fontSize: 11,
     flex: 1,
     flexDirection: "column",
     gap: 20,
     alignItems: "flex-end",
     justifyContent: "flex-start"
-  }
-  ,
+  },
   summary: {
     paddingVertical: 10,
     width: 250,
     flex: 1,
-    gap: 5,
     flexDirection: "row",
     justifyContent: "space-between",
     textAlign: "left",
@@ -158,7 +154,7 @@ const styles = StyleSheet.create({
     flex:1,
     bottom: 200,
     left: 20,
-    fontSize: 14,
+    fontSize: 10,
     maxWidth: "50%"
   },
   tcHead: {
@@ -167,14 +163,8 @@ const styles = StyleSheet.create({
   tc:{
     flex: 1,
     flexDirection: "column"
-
   },
-
-
 });
-
-// const date = new Date();
-// const [day, month,year] = [(date.getDay()>9) ? date.getDay() :"0" + date.getMonth(),(date.getMonth()>9) ? date.getMonth() :"0" + date.getMonth(),date.getFullYear()];
 
 const PDFFile = ({ pdfData }) => {
   const { name, email, title, date, address } = pdfData.clientInfo;
@@ -183,18 +173,17 @@ const PDFFile = ({ pdfData }) => {
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        {/* <Text style={styles.heading}>Quotation</Text> */}
         <View style={styles.quotationReference}>
-          {/* <Text style={styles.heading}>Quotation #AC0001</Text> */}
-
-
-          <View style={styles.customerDetails}>
+           <View style={styles.customerDetails}>
             <Text>{name}</Text>
             <Text>{address}</Text>
           </View><Text style={styles.dateOfIssue}>{date}</Text>
         </View>
         <View style={styles.table}>
           <View style={[styles.tableRow, styles.tableHeader]}>
+          <View style={styles.snoCol}>
+              <Text style={styles.headerCell}>SNO</Text>
+            </View>
             <View style={styles.firstCol}>
               <Text style={styles.headerCell}>Product</Text>
             </View>
@@ -208,9 +197,14 @@ const PDFFile = ({ pdfData }) => {
               <Text style={styles.headerCell}>Total</Text>
             </View>
           </View>
-          {items.map((item) => (
+          {items.map((item, index) => (
             <>
               <View style={styles.tableRow}>
+              <View style={styles.snoCol}>
+                  <Text style={styles.tableCell}>
+                    {index+1}
+                  </Text>
+                </View>
                 <View style={styles.firstCol}>
                   <Text style={styles.tableCell}>
                     {item.itemName}
@@ -223,7 +217,7 @@ const PDFFile = ({ pdfData }) => {
                   <Text style={styles.tableCell}>{item.qty}</Text>
                 </View>
                 <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>₹{item.totalPrice}</Text>
+                  <Text style={[styles.tableCell,styles.rightAlignedCell]}>₹{item.totalPrice}</Text>
                 </View>
               </View>
               <View style={styles.hline}></View>
@@ -253,7 +247,6 @@ const PDFFile = ({ pdfData }) => {
               <Text>• Rates applicable on road transportation are charged extra</Text>
             </View>
         </View>
-
       </Page>
     </Document>
   );
