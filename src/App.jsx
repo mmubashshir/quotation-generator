@@ -16,10 +16,10 @@ function App() {
   return (
     <>
       <div className="p-8">
-        {/* <Form /> */}
-        <PDFViewer style={styles.viewer} showToolbar={true}>
+        <Form />
+{/*         <PDFViewer style={styles.viewer} showToolbar={true}>
           <PDFFile pdfData={store} />
-        </PDFViewer>
+        </PDFViewer> */}
       </div>
     </>
   )
