@@ -1,4 +1,4 @@
-import { usePDF, BlobProvider } from "@react-pdf/renderer";
+import { BlobProvider } from "@react-pdf/renderer";
 import useStore from "../store";
 import PDFFile from "./PDFFile";
 import ClientInfo from "./ClientInfo";
@@ -38,7 +38,7 @@ const Form = () => {
             ></path>
           </svg>
           <BlobProvider document={<PDFFile pdfData={store} />}>
-            {({ blob, url }) => (
+            {({ url }) => (
               <Link
                 to={url}
                 download="Example-PDF.pdf"

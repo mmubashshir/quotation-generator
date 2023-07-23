@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Page,
   Text,
@@ -8,6 +7,9 @@ import {
   Font,
 } from "@react-pdf/renderer";
 import "../index.css";
+import { TableHeader } from "./PDFComponents/TableHeader";
+import { TableRow } from "./PDFComponents/TableRow";
+import { HeaderSection } from "./PDFComponents/HeaderSection";
 
 Font.register({
   family: "Inter",
@@ -56,29 +58,28 @@ const styles = StyleSheet.create({
     padding: 20,
     flex: 1,
     paddingBottom: 0,
-    marginTop: '50mm',
+    marginTop: "50mm",
     fontFamily: "Inter",
-    
   },
   quotationReference: {
     flex: 1,
-    // gap: 20,
+    marginTop: "-6mm",
     marginLeft: "15mm",
     marginBottom: 20,
     flexDirection: "row",
     justifyContent: "space-between",
     maxHeight: 60,
-    fontSize: 14
+    fontSize: 14,
   },
   quotationNumber: {
     fontSize: 28,
     fontWeight: "600",
   },
   dateOfIssue: {
-    paddingRight: "10mm"
+    paddingRight: "10mm",
   },
   customerDetails: {
-    
+    marginTop: "6mm",
     maxHeight: 150,
     flex: 1,
   },
@@ -86,50 +87,11 @@ const styles = StyleSheet.create({
     fontFamily: "Inter",
     fontSize: 16,
     fontWeight: "600",
-    textAlign: "center"
+    textAlign: "center",
   },
   table: {
     display: "table",
     width: "auto",
-  },
-  tableRow: {
-    margin: "auto",
-    flexDirection: "row",
-    alignItems: "center"
-  },
-  snoCol: {
-    width: "6%"
-  },
-  firstCol: {
-    width: "43%",
-  },
-  tableCol: {
-    width: "17%",
-  },
-  tableCell: {
-    paddingVertical: 10,
-    fontSize: 11,
-    textAlign: "center"
-  },
-  rightAlignedCell: {
-    textAlign: "right",
-  },
-  hline: {
-    width: "100%",
-    height: 1,
-    backgroundColor: "#000",
-  },
-  tableHeader: {
-    fontSize: 25,
-    fontWeight: "700",
-    padding: 10,
-    alignItems: "center",
-    backgroundColor: "#000",
-    color: "#fff",
-  },
-  headerCell: {
-    margin: "auto",
-    fontSize: 12
   },
   summaryContainer: {
     fontSize: 11,
@@ -137,7 +99,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: 20,
     alignItems: "flex-end",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   summary: {
     paddingVertical: 10,
@@ -149,7 +111,7 @@ const styles = StyleSheet.create({
     borderTop: "1pt soild #000",
   },
   removeBorder: {
-    border: "none"
+    border: "none",
   },
   tcContainer: {
     position: "absolute",
@@ -157,75 +119,29 @@ const styles = StyleSheet.create({
     bottom: 200,
     left: 20,
     fontSize: 10,
-    maxWidth: "50%"
+    maxWidth: "50%",
   },
   tcHead: {
-    fontWeight: "600"
+    fontWeight: "600",
   },
   tc: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
   },
 });
 
 const PDFFile = ({ pdfData }) => {
-  const { name, email, title, date, address } = pdfData.clientInfo;
+  const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal } = pdfData;
   const items = pdfData.items;
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-      <Text style={styles.heading}>Quotation</Text>
-        <View style={styles.quotationReference}>
-          <View style={styles.customerDetails}>
-            <Text>Sharadha Vidhyanikethana{name}</Text>
-            <Text>KCRoad{"\n"}
-              Mangalore {address}</Text>
-          </View><Text style={styles.dateOfIssue}>{date}</Text>
-        </View>
+        <HeaderSection name={name} address={address} date={date} />
         <View style={styles.table}>
-          <View style={[styles.tableRow, styles.tableHeader]}>
-            <View style={styles.snoCol}>
-              <Text style={styles.headerCell}>Sno</Text>
-            </View>
-            <View style={styles.firstCol}>
-              <Text style={styles.headerCell}>Product</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.headerCell}>Price</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.headerCell}>Qty.</Text>
-            </View>
-            <View style={styles.tableCol}>
-              <Text style={styles.headerCell}>Total</Text>
-            </View>
-          </View>
+          <TableHeader />
           {items.map((item, index) => (
-            <>
-              <View style={styles.tableRow}>
-                <View style={styles.snoCol}>
-                  <Text style={styles.tableCell}>
-                    {index + 1}
-                  </Text>
-                </View>
-                <View style={styles.firstCol}>
-                  <Text style={styles.tableCell}>
-                    {item.itemName}
-                  </Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>₹{item.price}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={styles.tableCell}>{item.qty}</Text>
-                </View>
-                <View style={styles.tableCol}>
-                  <Text style={[styles.tableCell, styles.rightAlignedCell]}>₹{item.totalPrice}</Text>
-                </View>
-              </View>
-              <View style={styles.hline}></View>
-            </>
+            <TableRow item={item} index={index} key={item.id} />
           ))}
           <View style={styles.summaryContainer}>
             <View style={[styles.summary, styles.removeBorder]}>
@@ -246,9 +162,17 @@ const PDFFile = ({ pdfData }) => {
         <View style={styles.tcContainer}>
           <Text style={styles.tcHead}>Terms & Conditions</Text>
           <View style={styles.tc}>
-            <Text>• Above Information is not an invoice and only an estimate of goods/services</Text>
-            <Text>• Payment will be due prior to provision or delivery of goods/services</Text>
-            <Text>• Rates applicable on road transportation are charged extra</Text>
+            <Text>
+              • Above Information is not an invoice and only an estimate of
+              goods/services
+            </Text>
+            <Text>
+              • Payment will be due prior to provision or delivery of
+              goods/services
+            </Text>
+            <Text>
+              • Rates applicable on road transportation are charged extra
+            </Text>
           </View>
         </View>
       </Page>
@@ -256,4 +180,4 @@ const PDFFile = ({ pdfData }) => {
   );
 };
 
-export default (PDFFile);
+export default PDFFile;

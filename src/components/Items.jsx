@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
 import useStore from "../store";
-
+import { GSTButton } from "./GSTButton";
 
 const Items = () => {
-  const store = useStore((state) => state)
+  const store = useStore((state) => state);
   return (
     <>
       <section className="flex flex-col" id="quotation-items">
@@ -29,37 +28,53 @@ const Items = () => {
                   value={item.itemName}
                   placeholder={`Item ${index + 1}`}
                   onChange={(e) =>
-                    store.handleItemInputChange(item.id, "itemName", e.target.value)
+                    store.handleItemInputChange(
+                      item.id,
+                      "itemName",
+                      e.target.value
+                    )
                   }
-                  required />
+                  required
+                />
                 <input
                   className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="price"
-                  value={(item.price === 0 ) ? "" : item.price}
+                  value={item.price === 0 ? "" : item.price}
                   type="number"
                   placeholder="₹100"
                   onChange={(e) =>
-                    store.handleItemInputChange(item.id, "price", e.target.value)
+                    store.handleItemInputChange(
+                      item.id,
+                      "price",
+                      e.target.value
+                    )
                   }
-                  required />
+                  required
+                />
                 <input
                   className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="qty"
                   type="number"
-                  value={(item.qty === 0) ? "" : item.qty}
+                  value={item.qty === 0 ? "" : item.qty}
                   placeholder="1"
                   onChange={(e) =>
                     store.handleItemInputChange(item.id, "qty", e.target.value)
                   }
-                  required />
+                  required
+                />
                 <input
                   className="text-sm text-opacity-75 mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="total"
                   type="number"
-                  value={(item.price * item.qty === 0 ) ? "" : (item.price * item.qty).toFixed(2) }
+                  value={
+                    item.price * item.qty === 0
+                      ? ""
+                      : (item.price * item.qty).toFixed(2)
+                  }
                   placeholder="₹100"
                   readOnly
-                  required />
+                  required
+                />
                 <button
                   className="rounded-full p-3 bg-gray-50 hover:bg-red-100"
                   onClick={() => store.removeItem(item.id)}
@@ -87,16 +102,25 @@ const Items = () => {
             <span className="text-xl">+</span> Add Item
           </button>
         </div>
-        <div className="flex flex-col place-items-end mr-16">
-          <div className="flex gap-20">
-            <h3 className="text-lg font-medium">GST</h3>
+        <div className="flex flex-col gap-1.5 items-end justify-start sm:mr-16">
+          <div className="flex text-left w-72 justify-between">
+            <h3 className="text-lg font-medium">Sub Total</h3>
+            <h3 className="text-lg font-medium">
+              ₹<span id="GST">{store.subtotal}</span>
+            </h3>
+          </div>
+          <div className="flex text-left w-72 justify-between">
+            <div className="flex gap-2 items-center">
+              <h3 className="text-lg font-medium">GST</h3>
+              <GSTButton/>
+            </div>
             <h3 className="text-lg font-medium">
               ₹<span id="GST">{store.gst}</span>
             </h3>
           </div>
-          <div className="flex gap-10">
-            <h2 className="text-xl font-medium">Total Amount</h2>
-            <h2 className="text-xl font-medium">
+          <div className="flex text-left w-72 justify-between">
+            <h2 className="text-lg font-semibold">Total Amount</h2>
+            <h2 className="text-lg font-semibold">
               ₹<span id="totalAmount">{store.grandTotal}</span>
             </h2>
           </div>
