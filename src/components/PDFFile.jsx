@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
 
 const PDFFile = ({ pdfData }) => {
   const { name, date, address } = pdfData.clientInfo;
-  const { subtotal, gst, grandTotal } = pdfData;
+  const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
   return (
     <Document>
@@ -149,7 +149,7 @@ const PDFFile = ({ pdfData }) => {
               <Text>₹{subtotal}</Text>
             </View>
             <View style={styles.summary}>
-              <Text>GST</Text>
+              <Text>GST ({gstPercentage.percent}%)</Text>
               <Text>₹{gst}</Text>
             </View>
             <View style={styles.summary}>
