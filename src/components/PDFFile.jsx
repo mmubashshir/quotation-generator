@@ -55,9 +55,9 @@ Font.register({
 
 const styles = StyleSheet.create({
   page: {
-    padding: 20,
+    paddingTop: 10,
+    paddingHorizontal: 35,
     flex: 1,
-    paddingBottom: 0,
     marginTop: "50mm",
     fontFamily: "Inter",
   },
@@ -75,9 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "600",
   },
-  dateOfIssue: {
-    paddingRight: "10mm",
-  },
   customerDetails: {
     marginTop: "6mm",
     maxHeight: 150,
@@ -94,7 +91,7 @@ const styles = StyleSheet.create({
     width: "auto",
   },
   summaryContainer: {
-    fontSize: 11,
+    fontSize: 10,
     flex: 1,
     flexDirection: "column",
     gap: 20,
@@ -102,11 +99,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   summary: {
-    paddingVertical: 10,
+    paddingTop: 9,
     width: 250,
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    // alignItems: "center",
     textAlign: "left",
     borderTop: "1pt soild #000",
   },
@@ -116,9 +114,9 @@ const styles = StyleSheet.create({
   tcContainer: {
     position: "absolute",
     flex: 1,
-    bottom: 200,
-    left: 20,
-    fontSize: 10,
+    bottom: 225,
+    left: 38,
+    fontSize: 8,
     maxWidth: "50%",
   },
   tcHead: {

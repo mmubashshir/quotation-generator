@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     width: "17%",
   },
   tableCell: {
-    paddingVertical: 10,
-    fontSize: 11,
+    paddingVertical: 8,
+    fontSize: 10,
     textAlign: "center",
   },
   rightAlignedCell: {

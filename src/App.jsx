@@ -17,7 +17,7 @@ function App() {
     <>
       <div className="p-8">
         <Form />
-{/*         <PDFViewer style={styles.viewer} showToolbar={true}>
+        {/* <PDFViewer style={styles.viewer} showToolbar={true}>
           <PDFFile pdfData={store} />
         </PDFViewer> */}
       </div>

@@ -3,20 +3,20 @@ import { Text, View, StyleSheet } from "@react-pdf/renderer";
 const styles = StyleSheet.create({
   quotationReference: {
     flex: 1,
-    marginTop: "-6mm",
+    marginTop: "-7mm",
     marginLeft: "15mm",
-    marginBottom: 20,
+    marginBottom: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     maxHeight: 60,
-    fontSize: 14,
+    fontSize: 12,
   },
   quotationNumber: {
     fontSize: 28,
     fontWeight: "600",
   },
   dateOfIssue: {
-    paddingRight: "10mm",
+    paddingRight: "5mm",
   },
   customerDetails: {
     marginTop: "6mm",

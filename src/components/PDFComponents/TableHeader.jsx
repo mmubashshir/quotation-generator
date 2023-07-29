@@ -16,16 +16,15 @@ const styles = StyleSheet.create({
     width: "17%",
   },
   tableHeader: {
-    fontSize: 25,
-    fontWeight: "700",
-    padding: 10,
+    fontWeight: "600",
+    padding: 8,
     alignItems: "center",
     backgroundColor: "#000",
     color: "#fff",
   },
   headerCell: {
     margin: "auto",
-    fontSize: 12,
+    fontSize: 11,
   },
 });
 
