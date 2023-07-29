@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     margin: "auto",
     fontSize: 11,
   },
+  lastCell: {
+    textAlign: "center"
+  }
 });
 
 const TableHeader = () => {
@@ -45,7 +48,7 @@ const TableHeader = () => {
           <Text style={styles.headerCell}>Qty.</Text>
         </View>
         <View style={styles.tableCol}>
-          <Text style={styles.headerCell}>Total</Text>
+          <Text style={[styles.headerCell, styles.lastCell]}>Total</Text>
         </View>
       </View>
     </>

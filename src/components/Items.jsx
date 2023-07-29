@@ -106,7 +106,7 @@ const Items = () => {
           <div className="flex text-left w-72 justify-between">
             <h3 className="text-lg font-medium">Sub Total</h3>
             <h3 className="text-lg font-medium">
-              ₹<span id="GST">{store.subtotal}</span>
+              ₹<span id="GST">{store.subtotal ? store.subtotal : "0.00"}</span>
             </h3>
           </div>
           <div className="flex text-left w-72 justify-between">
@@ -115,13 +115,13 @@ const Items = () => {
               <GSTButton/>
             </div>
             <h3 className="text-lg font-medium">
-              ₹<span id="GST">{store.gst}</span>
+              ₹<span id="GST">{store.gst ? store.gst : "0.00"}</span>
             </h3>
           </div>
           <div className="flex text-left w-72 justify-between">
             <h2 className="text-lg font-semibold">Total Amount</h2>
             <h2 className="text-lg font-semibold">
-              ₹<span id="totalAmount">{store.grandTotal}</span>
+              ₹<span id="totalAmount">{store.grandTotal ? store.grandTotal : "0.00"}</span>
             </h2>
           </div>
         </div>

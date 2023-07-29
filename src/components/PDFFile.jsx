@@ -55,7 +55,7 @@ Font.register({
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 10,
+    paddingTop: 0,
     paddingHorizontal: 35,
     flex: 1,
     marginTop: "50mm",
@@ -111,13 +111,27 @@ const styles = StyleSheet.create({
   removeBorder: {
     border: "none",
   },
-  tcContainer: {
+  footer: {
     position: "absolute",
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
     bottom: 225,
-    left: 38,
+    left: 43,
     fontSize: 8,
-    maxWidth: "50%",
+    maxWidth: "100%",
+  },
+  tcContainer: {
+    width: "50%",
+    textAlign:"justify",
+    gap:"1mm"
+  },
+  signature: {
+    fontWeight: "600",
+    width: "50%",
+    textAlign: "right",
+    marginRight: 25,
+    alignSelf: "flex-end"
   },
   tcHead: {
     fontWeight: "600",
@@ -157,20 +171,25 @@ const PDFFile = ({ pdfData }) => {
           </View>
         </View>
 
-        <View style={styles.tcContainer}>
-          <Text style={styles.tcHead}>Terms & Conditions</Text>
-          <View style={styles.tc}>
-            <Text>
-              • Above Information is not an invoice and only an estimate of
-              goods/services
-            </Text>
-            <Text>
-              • Payment will be due prior to provision or delivery of
-              goods/services
-            </Text>
-            <Text>
-              • Rates applicable on road transportation are charged extra
-            </Text>
+        <View style={styles.footer}>
+          <View style={styles.tcContainer}>
+            <Text style={styles.tcHead}>Terms & Conditions</Text>
+            <View style={styles.tc}>
+              <Text>
+                • Above Information is not an invoice and only an estimate of
+                goods/services
+              </Text>
+              <Text>
+                • Payment will be due prior to provision or delivery of
+                goods/services
+              </Text>
+              <Text>
+                • Rates applicable on road transportation are charged extra
+              </Text>
+            </View>
+          </View>
+          <View style={styles.signature}>
+            <Text>Authorised Signature</Text>
           </View>
         </View>
       </Page>
