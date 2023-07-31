@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import downloadIcon from "../assets/download-icon.png"
 const Form = () => {
   const store = useStore((state) => state);
   const [loadingFile, setLoadingFile] = useState(false);
@@ -45,7 +46,14 @@ const Form = () => {
                   target="_blank"
                   rel="noreferrer"
                 > */}
-                  {loadingFile ? <Loading /> : "Download PDF"}
+                  {loadingFile ? (
+                    <Loading />
+                  ) : (
+                    <>
+                      <img className="h-4 pr-2" src={downloadIcon} alt=""/>
+                      Download PDF
+                    </>
+                  )}
                   {/* </Link> */}
                 </button>
               </div>

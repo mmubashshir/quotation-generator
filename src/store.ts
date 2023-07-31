@@ -72,6 +72,7 @@ const useStore = create((set) => ({
   items: [
     { id: crypto.randomUUID(), itemName: "", price: 0, qty: 0, totalPrice: 0 },
   ],
+  itemContentsType: "qty",
   gstPercentage: { selectedOption: "GST18", percent: 18 },
   addItem: () =>
     set((state) => {
@@ -119,16 +120,18 @@ const useStore = create((set) => ({
       );
       return { gstPercentage: updatedGST, subtotal, gst, grandTotal };
     }),
+    handleItemContentsType: (value) => 
+    set(state => {
+      return {...state.itemContentsType,itemContentsType: value}
+    }) ,
   subtotal: 0,
   gst: 0,
   grandTotal: 0,
   // Only for Client Info State Management
   clientInfo: {
     name: "",
-    email: "",
     address: "",
     date: getTodaysDate(),
-    title: "",
   },
   handleClientInfoChange: (event) =>
     set((state) => ({
