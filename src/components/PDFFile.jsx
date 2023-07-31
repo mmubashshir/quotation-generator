@@ -10,6 +10,7 @@ import "../index.css";
 import { TableHeader } from "./PDFComponents/TableHeader";
 import { TableRow } from "./PDFComponents/TableRow";
 import { HeaderSection } from "./PDFComponents/HeaderSection";
+import { HeaderSection2 } from "./PDFComponents/HeaderSection2";
 
 Font.register({
   family: "Inter",
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingHorizontal: 35,
     flex: 1,
-    marginTop: "50mm",
+    marginTop: "53mm",
     fontFamily: "Inter",
   },
   quotationReference: {
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    bottom: 225,
+    bottom: 230,
     left: 43,
     fontSize: 8,
     maxWidth: "100%",
@@ -149,7 +150,8 @@ const PDFFile = ({ pdfData }) => {
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        <HeaderSection name={name} address={address} date={date} />
+        <HeaderSection2 name={name} address={address} date={date} />
+        {/* <HeaderSection name={name} address={address} date={date} /> */}
         <View style={styles.table}>
           <TableHeader />
           {items.map((item, index) => (
