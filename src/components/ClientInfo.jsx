@@ -23,6 +23,7 @@ const ClientInfo = () => {
               onChange={(event) => store.handleClientInfoChange(event)}
               placeholder="John Doe"
               type="text"
+              required
             />
           </div>
           <div className="flex flex-col w-full md:w-1/2">
@@ -49,6 +50,7 @@ const ClientInfo = () => {
           onChange={(event) => store.handleClientInfoChange(event)}
           placeholder="123 Main Street,&#10;Anytown,&#10;India"
           type="text"
+          required
         />
         {/* <label className="mt-2 font-normal" htmlFor="sub-address">
             Sub Address

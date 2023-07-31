@@ -3,6 +3,7 @@ import { PDFViewer, StyleSheet } from "@react-pdf/renderer";
 import "./App.css";
 import Form from "./components/Form";
 import PDFFile from "./components/PDFFile";
+import { Toaster } from "react-hot-toast";
 const styles = StyleSheet.create({
   viewer: {
     border: "none",
@@ -21,6 +22,7 @@ function App() {
           <PDFFile pdfData={store} />
         </PDFViewer> */}
       </div>
+      <Toaster />
     </>
   )
 }

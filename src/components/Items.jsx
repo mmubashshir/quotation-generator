@@ -76,8 +76,10 @@ const Items = () => {
                   required
                 />
                 <button
-                  className="rounded-full p-3 bg-gray-50 hover:bg-red-100"
+                  type="button"
+                  className="rounded-full p-3 bg-gray-50 hover:bg-red-100 disabled:invisible"
                   onClick={() => store.removeItem(item.id)}
+                  disabled={store.items.length === 1}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,6 +97,7 @@ const Items = () => {
           })}
 
           <button
+            type="button"
             onClick={store.addItem}
             id="add-item-btn"
             className="my-2 p-2 rounded-xl hover:bg-blue-100  text-[#1453ff] font-semibold"
@@ -112,7 +115,7 @@ const Items = () => {
           <div className="flex text-left w-72 justify-between">
             <div className="flex gap-2 items-center">
               <h3 className="text-lg font-medium">GST</h3>
-              <GSTButton/>
+              <GSTButton />
             </div>
             <h3 className="text-lg font-medium">
               ₹<span id="GST">{store.gst ? store.gst : "0.00"}</span>
@@ -121,7 +124,10 @@ const Items = () => {
           <div className="flex text-left w-72 justify-between">
             <h2 className="text-lg font-semibold">Total Amount</h2>
             <h2 className="text-lg font-semibold">
-              ₹<span id="totalAmount">{store.grandTotal ? store.grandTotal : "0.00"}</span>
+              ₹
+              <span id="totalAmount">
+                {store.grandTotal ? store.grandTotal : "0.00"}
+              </span>
             </h2>
           </div>
         </div>
