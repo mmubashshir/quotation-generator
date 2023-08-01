@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   }
 })
 function App() {
-  // const store = useStore((state) => state);
+  const store = useStore((state) => state);
   return (
     <>
       <div className="p-8">

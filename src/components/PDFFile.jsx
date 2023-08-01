@@ -112,6 +112,11 @@ const styles = StyleSheet.create({
   removeBorder: {
     border: "none",
   },
+  hline: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "#000",
+  },
   footer: {
     position: "absolute",
     flex: 1,
@@ -157,6 +162,7 @@ const PDFFile = ({ pdfData }) => {
           {items.map((item, index) => (
             <TableRow item={item} index={index} key={item.id} />
           ))}
+          <View style={styles.hline}></View>
           <View style={styles.summaryContainer}>
             <View style={[styles.summary, styles.removeBorder]}>
               <Text>Sub Total</Text>

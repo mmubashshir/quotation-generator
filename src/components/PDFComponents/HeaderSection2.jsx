@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   dateOfIssue: {
     fontSize: 11,
-    // paddingRight: "5mm",
+    paddingRight: "5mm",
   },
   customerDetails: {
     flex: 1,

@@ -28,10 +28,10 @@ const ClientInfo = () => {
             />
           </div>
           <div className="flex flex-col w-full md:w-1/2">
-            <label className="mt-2 mb-1 font-normal" htmlFor="date">
+            <label className="font-normal" htmlFor="date">
               Issued On
             </label>
-            <div className="relative">
+            <div className="relative mt-1">
               <span className="absolute left-3 top-3 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
