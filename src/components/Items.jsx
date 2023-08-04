@@ -1,6 +1,6 @@
 import useStore from "../store";
 import { GSTButton } from "./GSTButton";
-
+import isEmpty from "./checkEmpty";
 const Items = () => {
   const store = useStore((state) => state);
   return (
@@ -9,12 +9,13 @@ const Items = () => {
         <h3 className="text-xl font-medium mb-2">Quotation Item</h3>
         <div id="items-table">
           <div id="items-header" className="flex gap-2 ">
-            <span className="w-3/6 font-normal">Item</span>
-            <span className="w-1/6 font-normal">Price</span>
-            <span className="w-1/6 font-normal">Qty.</span>
-            <span className="w-1/6 font-normal">Total Price</span>
-            <span className="font-normal">
-              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+            <span className="w-5/12 font-normal">Item</span>
+            <span className="w-3/12 font-normal">Price</span>
+            <span className="w-1/12 font-normal">Wt</span>
+            <span className="w-1/12 font-normal">Qty.</span>
+            <span className="w-3/12 font-normal">Total Price</span>
+            <span className="font-normal w-12">
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
             </span>
           </div>
           {/* items map */}
@@ -22,7 +23,7 @@ const Items = () => {
             return (
               <div key={item.id} className="flex gap-2">
                 <input
-                  className="text-sm mt-1 p-3 w-3/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  className="text-sm mt-1 p-3 w-5/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="itemName"
                   type="text"
                   value={item.itemName}
@@ -37,7 +38,7 @@ const Items = () => {
                   required
                 />
                 <input
-                  className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  className="text-sm mt-1 p-3 w-3/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="price"
                   value={item.price === 0 ? "" : item.price}
                   type="number"
@@ -46,30 +47,43 @@ const Items = () => {
                     store.handleItemInputChange(
                       item.id,
                       "price",
-                      e.target.value
+                      isEmpty(e.target.value) ? 0 : parseInt(e.target.value)
                     )
                   }
                   required
                 />
                 <input
-                  className="text-sm mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  className="text-sm mt-1 p-3 w-1/12 text-center rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  name="weight"
+                  value={item.weight === 0 ? "" : item.weight}
+                  type="number"
+                  placeholder="1.0"
+                  onChange={(e) =>
+                    store.handleItemInputChange(
+                      item.id,
+                      "weight",
+                      isEmpty(e.target.value) ? 0 : parseFloat(e.target.value)
+                    )
+                  }
+                  required={item.qty === 0}
+                />
+                <input
+                  className="text-sm mt-1 p-3 w-1/12 text-center rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="qty"
                   type="number"
                   value={item.qty === 0 ? "" : item.qty}
                   placeholder="1"
                   onChange={(e) =>
-                    store.handleItemInputChange(item.id, "qty", e.target.value)
+                    store.handleItemInputChange(item.id, "qty", isEmpty(e.target.value) ? 0 : parseFloat(e.target.value))
                   }
-                  required
+                  required={item.weight === 0}
                 />
                 <input
-                  className="text-sm text-opacity-75 mt-1 p-3 w-1/6 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  className="text-sm text-opacity-75 mt-1 p-3 w-3/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="total"
                   type="number"
                   value={
-                    item.price * item.qty === 0
-                      ? ""
-                      : (item.price * item.qty).toFixed(2)
+                    item.totalPrice
                   }
                   placeholder="₹100"
                   readOnly

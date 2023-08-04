@@ -16,7 +16,7 @@ function App() {
   const store = useStore((state) => state);
   return (
     <>
-      <div className="p-8">
+      <div className="p-8 text-sm">
         <Form />
         {/* <PDFViewer style={styles.viewer} showToolbar={true}>
           <PDFFile pdfData={store} />

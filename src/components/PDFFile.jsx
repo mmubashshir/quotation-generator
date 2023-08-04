@@ -11,6 +11,7 @@ import { TableHeader } from "./PDFComponents/TableHeader";
 import { TableRow } from "./PDFComponents/TableRow";
 import { HeaderSection } from "./PDFComponents/HeaderSection";
 import { HeaderSection2 } from "./PDFComponents/HeaderSection2";
+import isEmpty from "./checkEmpty";
 
 Font.register({
   family: "Inter",
@@ -152,15 +153,18 @@ const PDFFile = ({ pdfData }) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
+  // Checks if any weight and qty are present
+  let weightsPresent = (items.some(item => !isEmpty(item.weight)));
+  let qtyPresent = (items.some(item => !isEmpty(item.qty)));
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        <HeaderSection2 name={name} address={address} date={date} />
+        <HeaderSection2 name={name} address={address} date={date}/>
         {/* <HeaderSection name={name} address={address} date={date} /> */}
         <View style={styles.table}>
-          <TableHeader />
+          <TableHeader  weightsPresent={weightsPresent} qtyPresent={qtyPresent}/>
           {items.map((item, index) => (
-            <TableRow item={item} index={index} key={item.id} />
+            <TableRow item={item} index={index} key={item.id} weightsPresent={weightsPresent} qtyPresent={qtyPresent}/>
           ))}
           <View style={styles.hline}></View>
           <View style={styles.summaryContainer}>

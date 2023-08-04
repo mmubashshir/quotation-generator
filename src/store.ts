@@ -1,10 +1,12 @@
 import { create } from "zustand";
+import isEmpty from "./components/checkEmpty";
 
 /** Item interface */
 interface Item {
   id: string;
   itemName: string;
   price: number;
+  weight: number;
   qty: number;
   totalPrice: number;
 }
@@ -12,19 +14,19 @@ interface Item {
 // Add new item rows
 const addItem = (items: Item[]) => [
   ...items,
-  { id: crypto.randomUUID(), itemName: "", price: "", qty: "", totalPrice: 0 },
+  { id: crypto.randomUUID(), itemName: "", price: "", qty: 0, weight: 0, totalPrice: 0 },
 ];
 
 // Delete Items
 const removeItem = (items: Item[], id: string) => items.filter((item) => item.id !== id);
 
 // Handle  Item input changes
-const handleItemInputChange = (prevData: Item[], id:string, field: number | string, value: number | string) => {
+const handleItemInputChange = (prevData: Item[], id:string, field: number, value: number | string) => {
   return prevData.map((item) => {
     const updatedItem = item.id === id ? { ...item, [field]: value } : item;
     const resultItem = {
       ...updatedItem,
-      totalPrice: (updatedItem.price * updatedItem.qty).toFixed(2),
+      totalPrice: parseFloat((updatedItem.price * (isEmpty(updatedItem.weight) ? updatedItem.qty : updatedItem.weight)).toFixed(2)),
     };
     return resultItem;
   });
@@ -48,9 +50,9 @@ const calculateTotal = (items, { percent }) => {
   let subtotal = 0;
   items.forEach((item) => {
     const price = parseFloat(item.price);
-    const quantity = parseInt(item.qty);
-    if (!isNaN(price) && !isNaN(quantity)) {
-      subtotal += price * quantity;
+    const measure = isEmpty(item.weight) ? parseInt(item.qty) : parseFloat(item.weight);
+    if (!isNaN(price) && !isEmpty(measure)) {
+      subtotal += price * measure;
     }
   });
 
@@ -70,7 +72,7 @@ const calculateTotal = (items, { percent }) => {
 const useStore = create((set) => ({
   // Only for Item State Management
   items: [
-    { id: crypto.randomUUID(), itemName: "", price: 0, qty: 0, totalPrice: 0 },
+    { id: crypto.randomUUID(), itemName: "", price: 0, qty: 0,weight: 0, totalPrice: 0 },
   ],
   itemContentsType: "qty",
   gstPercentage: { selectedOption: "GST18", percent: 18 },

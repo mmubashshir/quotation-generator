@@ -9,12 +9,12 @@ const styles = StyleSheet.create({
     width: "6%",
   },
   itemNameCol: {
-    width: "62%",
+    // width: "62%",
   },
   priceCol: {
     width: "12%",
   },
-  qtyCol:{
+  measureCol: {
     width: "6%",
   },
   totalPriceCol: {
@@ -39,22 +39,29 @@ const styles = StyleSheet.create({
   }
 });
 
-const TableHeader = () => {
+const TableHeader = ({ weightsPresent, qtyPresent }) => {
   return (
     <>
       <View style={[styles.tableRow, styles.tableHeader]}>
         <View style={styles.snoCol}>
           <Text style={styles.headerCell}>SLNo</Text>
         </View>
-        <View style={styles.itemNameCol}>
+        <View style={{width: (qtyPresent && weightsPresent) ? "56%" : "62%"}}>
           <Text style={styles.headerCell}>Item</Text>
         </View>
         <View style={styles.priceCol}>
           <Text style={styles.headerCell}>Price</Text>
         </View>
-        <View style={styles.qtyCol}>
-          <Text style={styles.headerCell}>Qty.</Text>
-        </View>
+        {weightsPresent &&
+          <View style={styles.measureCol}>
+            <Text style={styles.headerCell}>Wt.</Text>
+          </View>
+        }
+        {qtyPresent &&
+          <View style={styles.measureCol}>
+            <Text style={styles.headerCell}>Qty.</Text>
+          </View>
+        }
         <View style={styles.totalPriceCol}>
           <Text style={[styles.headerCell, styles.lastCell]}>Total</Text>
         </View>
