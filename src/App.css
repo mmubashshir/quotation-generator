@@ -19,7 +19,6 @@
   white-space: nowrap;
   width: 1px;
 }
-
 .mydict input[type="radio"]:checked + span {
   box-shadow: 0 0 0 0.0625em #0043ed;
   background-color:  #0043ed;
@@ -33,7 +32,7 @@
   cursor: pointer;
   background-color: #e1e3e8;
   /* background-color: #fff; */
-  padding: 0.375em 0.75em;
+  padding: 0.2em 0.75em;
   position: relative;
   margin-left: 0.0625em;
   box-shadow: 0 0 0 0.0625em #e1e3e8;

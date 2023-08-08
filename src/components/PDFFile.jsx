@@ -172,10 +172,12 @@ const PDFFile = ({ pdfData }) => {
               <Text>Sub Total</Text>
               <Text>₹{subtotal}</Text>
             </View>
-            <View style={styles.summary}>
-              <Text>GST ({gstPercentage.percent}%)</Text>
-              <Text>₹{gst}</Text>
-            </View>
+            {parseInt(gstPercentage.percent)!==0 && 
+              <View style={styles.summary}>
+                <Text>GST ({gstPercentage.percent}%)</Text>
+                <Text>₹{gst}</Text>
+              </View>
+            }
             <View style={styles.summary}>
               <Text>Total</Text>
               <Text>₹{grandTotal}</Text>
