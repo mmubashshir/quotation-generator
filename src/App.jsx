@@ -7,8 +7,8 @@ import { Toaster } from "react-hot-toast";
 const styles = StyleSheet.create({
   viewer: {
     border: "none",
-    height: 1000,
-    width: "100%",
+    height:500,
+    width: "40%",
     backgroundColor: "transparent",
   }
 })
@@ -18,8 +18,8 @@ function App() {
     <>
       <div className="p-8 text-sm">
         <Form />
-        {/* <PDFViewer style={styles.viewer} showToolbar={true}>
-          <PDFFile pdfData={store} />
+        {/* <PDFViewer style={styles.viewer} showToolbar={false}>
+          <PDFFile pdfData={store} type={true} />
         </PDFViewer> */}
       </div>
       <Toaster />

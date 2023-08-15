@@ -1,6 +1,7 @@
 import useStore from "../store";
 import ItemContentsType from "./ItemContentsType";
-const ClientInfo = () => {
+import QuotationStyle from "./QuotationStyle";
+const ClientInfo = ({handleToggle}) => {
   const store = useStore((state) => state);
   return (
     <>
@@ -65,6 +66,7 @@ const ClientInfo = () => {
           type="text"
           required
         />
+        <QuotationStyle handleToggle= {handleToggle} />
         {/* <label className="mt-2 font-normal" htmlFor="sub-address">
             Sub Address
           </label>

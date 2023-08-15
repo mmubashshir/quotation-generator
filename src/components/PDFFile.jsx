@@ -4,6 +4,7 @@ import {
   View,
   Document,
   StyleSheet,
+  Image,
   Font,
 } from "@react-pdf/renderer";
 import "../index.css";
@@ -12,7 +13,7 @@ import { TableRow } from "./PDFComponents/TableRow";
 import { HeaderSection } from "./PDFComponents/HeaderSection";
 import { HeaderSection2 } from "./PDFComponents/HeaderSection2";
 import isEmpty from "./checkEmpty";
-
+import pdfBackground from "../assets/PDFBackground.jpg"
 Font.register({
   family: "Inter",
   fonts: [
@@ -58,10 +59,14 @@ Font.register({
 const styles = StyleSheet.create({
   page: {
     paddingTop: 0,
-    paddingHorizontal: 35,
     flex: 1,
-    marginTop: "53mm",
     fontFamily: "Inter",
+  },
+  mainPage: {
+    flex: 1,
+    paddingHorizontal: 35,
+    marginTop: "55mm",
+    zIndex: 0,
   },
   quotationReference: {
     flex: 1,
@@ -123,15 +128,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-    bottom: 230,
+    bottom: "32mm",
     left: 43,
     fontSize: 8,
     maxWidth: "100%",
   },
   tcContainer: {
     width: "50%",
-    textAlign:"justify",
-    gap:"1mm"
+    textAlign: "justify",
+    gap: "1mm"
   },
   signature: {
     fontWeight: "600",
@@ -147,9 +152,18 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  pageBackground: {
+    position: 'absolute',
+    minWidth: '100%',
+    minHeight: '100%',
+    display: 'block',
+    height: '100%',
+    width: '100%',
+    zIndex: -1,
+  },
 });
 
-const PDFFile = ({ pdfData }) => {
+const PDFFile = ({ pdfData , type}) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
@@ -159,52 +173,57 @@ const PDFFile = ({ pdfData }) => {
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        <HeaderSection2 name={name} address={address} date={date}/>
-        {/* <HeaderSection name={name} address={address} date={date} /> */}
-        <View style={styles.table}>
-          <TableHeader  weightsPresent={weightsPresent} qtyPresent={qtyPresent}/>
-          {items.map((item, index) => (
-            <TableRow item={item} index={index} key={item.id} weightsPresent={weightsPresent} qtyPresent={qtyPresent}/>
-          ))}
-          <View style={styles.hline}></View>
-          <View style={styles.summaryContainer}>
-            <View style={[styles.summary, styles.removeBorder]}>
-              <Text>Sub Total</Text>
-              <Text>₹{subtotal}</Text>
-            </View>
-            {parseInt(gstPercentage.percent)!==0 && 
-              <View style={styles.summary}>
-                <Text>GST ({gstPercentage.percent}%)</Text>
-                <Text>₹{gst}</Text>
+        {type  &&
+          <Image fixed={true} src={pdfBackground} style={styles.pageBackground} />}
+        <View style={styles.mainPage}>
+          <HeaderSection2 name={name} address={address} date={date} />
+          {/* <HeaderSection name={name} address={address} date={date} /> */}
+          <View style={styles.table}>
+            <TableHeader weightsPresent={weightsPresent} qtyPresent={qtyPresent} />
+            {items.map((item, index) => (
+              <TableRow item={item} index={index} key={item.id} weightsPresent={weightsPresent} qtyPresent={qtyPresent} />
+            ))}
+            <View style={styles.hline}></View>
+            <View style={styles.summaryContainer}>
+              <View style={[styles.summary, styles.removeBorder]}>
+                <Text>Sub Total</Text>
+                <Text>₹{subtotal}</Text>
               </View>
-            }
-            <View style={styles.summary}>
-              <Text>Total</Text>
-              <Text>₹{grandTotal}</Text>
+              {parseInt(gstPercentage.percent) !== 0 &&
+                <View style={styles.summary}>
+                  <Text>GST ({gstPercentage.percent}%)</Text>
+                  <Text>₹{gst}</Text>
+                </View>
+              }
+              <View style={styles.summary}>
+                <Text>Total</Text>
+                <Text>₹{grandTotal}</Text>
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.footer}>
-          <View style={styles.tcContainer}>
-            <Text style={styles.tcHead}>Terms & Conditions</Text>
-            <View style={styles.tc}>
-              <Text>
-                • Above Information is not an invoice and only an estimate of
-                goods/services
-              </Text>
-              <Text>
-                • Payment will be due prior to provision or delivery of
-                goods/services
-              </Text>
-              <Text>
-                • Rates applicable on road transportation are charged extra
-              </Text>
+          <View style={styles.footer}>
+            <View style={styles.tcContainer}>
+              <Text style={styles.tcHead}>Terms & Conditions</Text>
+              <View style={styles.tc}>
+                <Text>
+                  • Above Information is not an invoice and only an estimate of
+                  goods/services
+                </Text>
+                <Text>
+                  • Payment will be due prior to provision or delivery of
+                  goods/services
+                </Text>
+                <Text>
+                  • Rates applicable on road transportation are charged extra
+                </Text>
+              </View>
+            </View>
+            <View style={styles.signature}>
+              <Text>Authorised Signature</Text>
             </View>
           </View>
-          <View style={styles.signature}>
-            <Text>Authorised Signature</Text>
-          </View>
+
         </View>
       </Page>
     </Document>
