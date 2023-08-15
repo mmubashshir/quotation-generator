@@ -8,6 +8,7 @@ import Loading from "./Loading";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import downloadIcon from "../assets/download-icon.png"
+import TransitionsModal from "./Modal";
 const Form = () => {
   const store = useStore((state) => state);
   const [loadingFile, setLoadingFile] = useState(false);
@@ -16,6 +17,16 @@ const Form = () => {
   const handleToggle = (event) => {
     setToggle(event.target.checked)
   }
+  const handleEmailButtonClick = (url) => {  
+    event.preventDefault()
+    const emailSubject = encodeURIComponent('My PDF Attachment');
+    const emailBody = encodeURIComponent('Please find the attached PDF document.');
+    const emailAttachments = encodeURIComponent(url);
+  
+    const mailtoUrl = `mailto:?subject=${emailSubject}&body=${emailBody}&attachment=${emailAttachments}`;
+  
+    window.location.href = mailtoUrl;
+  };
   const handleDownload = async (url, event) => {
     event.preventDefault();
     setLoadingFile(true);
@@ -54,6 +65,7 @@ const Form = () => {
                   )}
                 </button>
               </div>
+              <TransitionsModal pdfUrl={url} />
             </form>
           )}
         </BlobProvider>

@@ -13,7 +13,7 @@ const options = {
 };
 
 
-export default function Sample({pdfURL}) {
+export default function ViewPDF({pdfURL}) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 

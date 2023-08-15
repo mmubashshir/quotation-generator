@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFFile = ({ pdfData , type}) => {
+const PDFFile = ({ pdfData, type }) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
@@ -173,8 +173,9 @@ const PDFFile = ({ pdfData , type}) => {
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        {type  &&
-          <Image fixed={true} src={pdfBackground} style={styles.pageBackground} />}
+        {type &&
+          <Image fixed={true} src={pdfBackground} style={styles.pageBackground} />
+          }
         <View style={styles.mainPage}>
           <HeaderSection2 name={name} address={address} date={date} />
           {/* <HeaderSection name={name} address={address} date={date} /> */}
