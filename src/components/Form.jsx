@@ -50,8 +50,9 @@ const Form = () => {
             <form onSubmit={(event) => handleDownload(url, event)}>
               <ClientInfo handleToggle={handleToggle}/>
               <Items />
-              <div className="flex justify-end mt-4" id="submit">
-                <button
+              <div className="flex justify-between items-center mt-4" id="submit">
+               <TransitionsModal pdfUrl={url} /> 
+               <button
                   type="submit"
                   className="drop-shadow-xl disabled:opacity-50 inline-flex float-right items-center px-4 py-3 font-semibold leading-6 text-sm shadow rounded-xl text-white bg-[#1453ff] hover:bg-opacity-90 "
                 >
@@ -65,7 +66,7 @@ const Form = () => {
                   )}
                 </button>
               </div>
-              <TransitionsModal pdfUrl={url} />
+              
             </form>
           )}
         </BlobProvider>
