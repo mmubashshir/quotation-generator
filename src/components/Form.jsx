@@ -50,7 +50,7 @@ const Form = () => {
             <form onSubmit={(event) => handleDownload(url, event)}>
               <ClientInfo handleToggle={handleToggle}/>
               <Items />
-              <div className="flex justify-between items-center mt-4" id="submit">
+              <div className="flex justify-between items-center` mt-4" id="submit">
                <TransitionsModal pdfUrl={url} /> 
                <button
                   type="submit"
