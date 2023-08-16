@@ -44,7 +44,7 @@ const Form = () => {
               <ClientInfo handleToggle={handleToggle} />
               <Items />
               <div
-                className="flex justify-between items-center` mt-4"
+                className="flex justify-center md:justify-between items-center gap-2 mt-4"
                 id="submit"
               >
                 <div className="flex gap-2">
@@ -54,7 +54,7 @@ const Form = () => {
                     type="reset"
                     onClick={() => store.reset()}
                   >
-                    <img className="h-4 pr-2" src={resetIcon} alt="" /> Reset
+                    <img className="h-4 md:pr-2" src={resetIcon} alt="" /><span className="hidden md:block">Reset</span> 
                   </button>
                 </div>
                 <button
@@ -66,7 +66,7 @@ const Form = () => {
                   ) : (
                     <>
                       <img className="h-4 pr-2" src={downloadIcon} alt="" />
-                      Download PDF
+                      Download
                     </>
                   )}
                 </button>
