@@ -38,12 +38,7 @@ const handleClientInfoChange = (prevClientData, event) => {
   return { ...prevClientData, [name]: value };
 };
 
-// Getting date in dd-mm-yyyy format
-const getTodaysDate = () => {
-  const d = new Date();
-  const [date, month, year] = [d.getDate(), d.getMonth(), d.getFullYear()];
-  return `${date}-${month}-${year}`;
-};
+
 
 // Calculate subTotal
 const calculateTotal = (items, { percent }) => {
@@ -133,7 +128,7 @@ const useStore = create((set) => ({
   clientInfo: {
     name: "",
     address: "",
-    date: getTodaysDate(),
+    date: new Date().toISOString().slice(0,10) ,
   },
   handleClientInfoChange: (event) =>
     set((state) => ({

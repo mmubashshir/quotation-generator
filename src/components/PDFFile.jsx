@@ -170,14 +170,21 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
   // Checks if any weight and qty are present
   let weightsPresent = (items.some(item => !isEmpty(item.weight)));
   let qtyPresent = (items.some(item => !isEmpty(item.qty)));
+  // Getting date in dd-mm-yyyy format
+  const formatDate = (date) => {
+    // const d = new Date();
+    const d = date.split("-")
+    const [day, month, year] = [d[2], d[1], d[0]];
+    return `${day}-${month}-${year}`;
+  };
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
         {getFullLetterHead &&
           <Image fixed={true} src={pdfBackground} style={styles.pageBackground} />
-          }
+        }
         <View style={styles.mainPage}>
-          <HeaderSection2 name={name} address={address} date={date} />
+          <HeaderSection2 name={name} address={address} date={formatDate(date)} />
           {/* <HeaderSection name={name} address={address} date={date} /> */}
           <View style={styles.table}>
             <TableHeader weightsPresent={weightsPresent} qtyPresent={qtyPresent} />
