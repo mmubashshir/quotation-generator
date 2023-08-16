@@ -45,7 +45,7 @@ const Form = () => {
   return (
     <>
       <main className=" bg-white p-8 sm:mx-[10%] lg:mx-[20%] xl:mx-[25%] rounded-xl drop-shadow-lg">
-        <BlobProvider document={<PDFFile pdfData={store} type={toggle}/>}>
+        <BlobProvider document={<PDFFile pdfData={store} getFullLetterHead={toggle}/>}>
           {({ url, loading }) => (
             <form onSubmit={(event) => handleDownload(url, event)}>
               <ClientInfo handleToggle={handleToggle}/>
