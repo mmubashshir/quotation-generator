@@ -3,11 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-} */
+
 * {
   box-sizing: border-box;
 }
@@ -15,16 +11,6 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   --lightBlue: #e9edf2;
-/*
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%; */
 }
 
 body {

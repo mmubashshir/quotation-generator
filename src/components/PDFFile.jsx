@@ -11,9 +11,8 @@ import "../index.css";
 import { TableHeader } from "./PDFComponents/TableHeader";
 import { TableRow } from "./PDFComponents/TableRow";
 import { HeaderSection } from "./PDFComponents/HeaderSection";
-import { HeaderSection2 } from "./PDFComponents/HeaderSection2";
 import isEmpty from "./checkEmpty";
-import pdfBackground from "../assets/PDFBackground.jpg"
+import pdfBackground from "../assets/PDFBackground.jpg";
 Font.register({
   family: "Inter",
   fonts: [
@@ -136,14 +135,14 @@ const styles = StyleSheet.create({
   tcContainer: {
     width: "50%",
     textAlign: "justify",
-    gap: "1mm"
+    gap: "1mm",
   },
   signature: {
     fontWeight: "600",
     width: "50%",
     textAlign: "right",
     marginRight: 25,
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
   tcHead: {
     fontWeight: "600",
@@ -153,12 +152,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   pageBackground: {
-    position: 'absolute',
-    minWidth: '100%',
-    minHeight: '100%',
-    display: 'block',
-    height: '100%',
-    width: '100%',
+    position: "absolute",
+    minWidth: "100%",
+    minHeight: "100%",
+    display: "block",
+    height: "100%",
+    width: "100%",
     zIndex: -1,
   },
 });
@@ -168,28 +167,44 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
   // Checks if any weight and qty are present
-  let weightsPresent = (items.some(item => !isEmpty(item.weight)));
-  let qtyPresent = (items.some(item => !isEmpty(item.qty)));
+  let weightsPresent = items.some((item) => !isEmpty(item.weight));
+  let qtyPresent = items.some((item) => !isEmpty(item.qty));
   // Getting date in dd-mm-yyyy format
   const formatDate = (date) => {
     // const d = new Date();
-    const d = date.split("-")
+    const d = date.split("-");
     const [day, month, year] = [d[2], d[1], d[0]];
     return `${day}-${month}-${year}`;
   };
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
-        {getFullLetterHead &&
-          <Image fixed={true} src={pdfBackground} style={styles.pageBackground} />
-        }
+        {getFullLetterHead && (
+          <Image
+            fixed={true}
+            src={pdfBackground}
+            style={styles.pageBackground}
+          />
+        )}
         <View style={styles.mainPage}>
-          <HeaderSection2 name={name} address={address} date={formatDate(date)} />
-          {/* <HeaderSection name={name} address={address} date={date} /> */}
+          <HeaderSection
+            name={name}
+            address={address}
+            date={formatDate(date)}
+          />
           <View style={styles.table}>
-            <TableHeader weightsPresent={weightsPresent} qtyPresent={qtyPresent} />
+            <TableHeader
+              weightsPresent={weightsPresent}
+              qtyPresent={qtyPresent}
+            />
             {items.map((item, index) => (
-              <TableRow item={item} index={index} key={item.id} weightsPresent={weightsPresent} qtyPresent={qtyPresent} />
+              <TableRow
+                item={item}
+                index={index}
+                key={item.id}
+                weightsPresent={weightsPresent}
+                qtyPresent={qtyPresent}
+              />
             ))}
             <View style={styles.hline}></View>
             <View style={styles.summaryContainer}>
@@ -197,12 +212,12 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
                 <Text>Sub Total</Text>
                 <Text>₹{subtotal}</Text>
               </View>
-              {parseInt(gstPercentage.percent) !== 0 &&
+              {parseInt(gstPercentage.percent) !== 0 && (
                 <View style={styles.summary}>
                   <Text>GST ({gstPercentage.percent}%)</Text>
                   <Text>₹{gst}</Text>
                 </View>
-              }
+              )}
               <View style={styles.summary}>
                 <Text>Total</Text>
                 <Text>₹{grandTotal}</Text>
@@ -231,7 +246,6 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
               <Text>Authorised Signature</Text>
             </View>
           </View>
-
         </View>
       </Page>
     </Document>

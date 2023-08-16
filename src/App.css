@@ -19,9 +19,10 @@
   white-space: nowrap;
   width: 1px;
 }
-.mydict input[type="radio"]:checked + span {
+
+.mydict input[type="radio"]:checked+span {
   box-shadow: 0 0 0 0.0625em #0043ed;
-  background-color:  #0043ed;
+  background-color: #0043ed;
   z-index: 1;
   color: #dee7ff;
 }
@@ -31,7 +32,6 @@
   display: block;
   cursor: pointer;
   background-color: #e1e3e8;
-  /* background-color: #fff; */
   padding: 0.2em 0.75em;
   position: relative;
   margin-left: 0.0625em;
@@ -93,11 +93,11 @@
 }
 
 /* Anahtarın etkin hale gelmesindeki stil değişiklikleri */
-.toggle-switch .toggle-input:checked + .toggle-label {
+.toggle-switch .toggle-input:checked+.toggle-label {
   background-color: #4CAF50;
 }
 
-.toggle-switch .toggle-input:checked + .toggle-label::before {
+.toggle-switch .toggle-input:checked+.toggle-label::before {
   transform: translateX(16px);
 }
 
@@ -106,11 +106,11 @@
   background-color: #BEBEBE;
 }
 
-.toggle-switch.light .toggle-input:checked + .toggle-label {
+.toggle-switch.light .toggle-input:checked+.toggle-label {
   background-color: #9B9B9B;
 }
 
-.toggle-switch.light .toggle-input:checked + .toggle-label::before {
+.toggle-switch.light .toggle-input:checked+.toggle-label::before {
   transform: translateX(6px);
 }
 
@@ -119,10 +119,10 @@
   background-color: #4B4B4B;
 }
 
-.toggle-switch.dark .toggle-input:checked + .toggle-label {
+.toggle-switch.dark .toggle-input:checked+.toggle-label {
   background-color: #717171;
 }
 
-.toggle-switch.dark .toggle-input:checked + .toggle-label::before {
+.toggle-switch.dark .toggle-input:checked+.toggle-label::before {
   transform: translateX(16px);
 }

@@ -1,15 +1,18 @@
 import useStore from "../store";
-import ItemContentsType from "./ItemContentsType";
 import QuotationStyle from "./QuotationStyle";
 
-const ClientInfo = ({handleToggle}) => {
+const ClientInfo = ({ handleToggle }) => {
   const store = useStore((state) => state);
   return (
     <>
       <section className="flex flex-col gap-3 mb-4" id="heading">
         <h3 className="text-xl font-medium">Create New Quotation</h3>
         <h2 className="text-3xl font-medium">
-          Quotation <span className="text-[#1453ff]">#NR001/08/2023</span>
+          Quotation{" "}
+          <span className="text-[#1453ff]">
+            #{store.clientInfo.name.slice(0, 7)}
+            {store.clientInfo.date}
+          </span>
         </h2>
       </section>
       <section className="flex flex-col mb-4" id="client-details">
@@ -34,17 +37,6 @@ const ClientInfo = ({handleToggle}) => {
               Issued On
             </label>
             <div className="relative mt-0">
-              {/* <span className="absolute left-3 top-3 ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  className="bi bi-calendar2-week w-5 h-5"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
-                  <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
-                </svg>
-              </span> */}
               <input
                 value={store.clientInfo.date}
                 onChange={(event) => store.handleClientInfoChange(event)}
@@ -56,7 +48,7 @@ const ClientInfo = ({handleToggle}) => {
           </div>
         </div>
         <label className="mt-2 font-normal" htmlFor="address">
-          {/* Main*/} Address
+          Address
         </label>
         <textarea
           className="text-sm mt-1 p-3 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
@@ -67,21 +59,7 @@ const ClientInfo = ({handleToggle}) => {
           type="text"
           required
         />
-        <QuotationStyle handleToggle= {handleToggle} />
-        {/* <label className="mt-2 font-normal" htmlFor="sub-address">
-            Sub Address
-          </label>
-          <input
-            className="text-sm mt-1 p-3 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
-            name="sub-address"
-            type="text"
-          /> */}
-        {/* <div className="flex flex-col items-center gap-4 md:flex-row">
-          <label className="mt-2 font-normal" htmlFor="title">
-            Quote Item By
-          </label>
-          <ItemContentsType />
-        </div> */}
+        <QuotationStyle handleToggle={handleToggle} />
       </section>
     </>
   );

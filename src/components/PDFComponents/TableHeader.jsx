@@ -8,9 +8,6 @@ const styles = StyleSheet.create({
   snoCol: {
     width: "6%",
   },
-  itemNameCol: {
-    // width: "62%",
-  },
   priceCol: {
     width: "12%",
   },
@@ -28,7 +25,6 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   headerCell: {
-    // margin: "auto",
     textAlign: "center",
     marginVertical: "auto",
     fontSize: 11,

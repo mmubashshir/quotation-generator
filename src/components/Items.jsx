@@ -74,7 +74,11 @@ const Items = () => {
                   value={item.qty === 0 ? "" : item.qty}
                   placeholder="1"
                   onChange={(e) =>
-                    store.handleItemInputChange(item.id, "qty", isEmpty(e.target.value) ? 0 : parseFloat(e.target.value))
+                    store.handleItemInputChange(
+                      item.id,
+                      "qty",
+                      isEmpty(e.target.value) ? 0 : parseFloat(e.target.value)
+                    )
                   }
                   required={item.weight === 0}
                 />
@@ -82,9 +86,7 @@ const Items = () => {
                   className="text-sm text-opacity-75 mt-1 p-3 w-3/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="total"
                   type="number"
-                  value={
-                    item.totalPrice
-                  }
+                  value={item.totalPrice}
                   placeholder="₹100"
                   readOnly
                   required

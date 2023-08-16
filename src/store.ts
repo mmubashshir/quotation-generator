@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 import isEmpty from "./components/checkEmpty";
 
 /** Item interface */
@@ -14,19 +15,37 @@ interface Item {
 // Add new item rows
 const addItem = (items: Item[]) => [
   ...items,
-  { id: crypto.randomUUID(), itemName: "", price: "", qty: 0, weight: 0, totalPrice: 0 },
+  {
+    id: crypto.randomUUID(),
+    itemName: "",
+    price: "",
+    qty: 0,
+    weight: 0,
+    totalPrice: 0,
+  },
 ];
 
 // Delete Items
-const removeItem = (items: Item[], id: string) => items.filter((item) => item.id !== id);
+const removeItem = (items: Item[], id: string) =>
+  items.filter((item) => item.id !== id);
 
 // Handle  Item input changes
-const handleItemInputChange = (prevData: Item[], id:string, field: number, value: number | string) => {
+const handleItemInputChange = (
+  prevData: Item[],
+  id: string,
+  field: number,
+  value: number | string
+) => {
   return prevData.map((item) => {
     const updatedItem = item.id === id ? { ...item, [field]: value } : item;
     const resultItem = {
       ...updatedItem,
-      totalPrice: parseFloat((updatedItem.price * (isEmpty(updatedItem.weight) ? updatedItem.qty : updatedItem.weight)).toFixed(2)),
+      totalPrice: parseFloat(
+        (
+          updatedItem.price *
+          (isEmpty(updatedItem.weight) ? updatedItem.qty : updatedItem.weight)
+        ).toFixed(2)
+      ),
     };
     return resultItem;
   });
@@ -38,14 +57,14 @@ const handleClientInfoChange = (prevClientData, event) => {
   return { ...prevClientData, [name]: value };
 };
 
-
-
 // Calculate subTotal
 const calculateTotal = (items, { percent }) => {
   let subtotal = 0;
   items.forEach((item) => {
     const price = parseFloat(item.price);
-    const measure = isEmpty(item.weight) ? parseInt(item.qty) : parseFloat(item.weight);
+    const measure = isEmpty(item.weight)
+      ? parseInt(item.qty)
+      : parseFloat(item.weight);
     if (!isNaN(price) && !isEmpty(measure)) {
       subtotal += price * measure;
     }
@@ -62,65 +81,20 @@ const calculateTotal = (items, { percent }) => {
   };
 };
 
-// Creating store using zustand for state management
-
-const useStore = create((set) => ({
-  // Only for Item State Management
+// Define Initial state
+const initialState: State = {
   items: [
-    { id: crypto.randomUUID(), itemName: "", price: 0, qty: 0,weight: 0, totalPrice: 0 },
+    {
+      id: crypto.randomUUID(),
+      itemName: "",
+      price: 0,
+      qty: 0,
+      weight: 0,
+      totalPrice: 0,
+    },
   ],
   itemContentsType: "qty",
   gstPercentage: { selectedOption: "GST18", percent: 18 },
-  addItem: () =>
-    set((state) => {
-      const updatedItems = addItem(state.items);
-      const { subtotal, gst, grandTotal } = calculateTotal(
-        updatedItems,
-        state.gstPercentage
-      );
-      return {
-        items: updatedItems,
-        subtotal,
-        gst,
-        grandTotal,
-      };
-    }),
-  handleItemInputChange: (id, field, value) =>
-    set((state) => {
-      const updatedItems = handleItemInputChange(state.items, id, field, value);
-      const { subtotal, gst, grandTotal } = calculateTotal(
-        updatedItems,
-        state.gstPercentage
-      );
-      return {
-        items: updatedItems,
-        subtotal,
-        gst,
-        grandTotal,
-      };
-    }),
-  removeItem: (id: string) =>
-    set((state) => ({
-      items: removeItem(state.items, id),
-    })),
-  handleGSTInputChange: (event) =>
-    set((state) => {
-      const updatedGST = {
-        ...state.gstPercentage,
-        selectedOption: event.target.name,
-        percent: event.target.value,
-      };
-      console.log(updatedGST);
-      const { subtotal, gst, grandTotal } = calculateTotal(
-        state.items,
-        updatedGST
-      );
-      return { gstPercentage: updatedGST, subtotal, gst, grandTotal };
-    }),
-    handleItemContentsType: (value) => 
-    set(state => {
-      return {...state.itemContentsType,itemContentsType: value}
-    }) ,
   subtotal: 0,
   gst: 0,
   grandTotal: 0,
@@ -128,12 +102,85 @@ const useStore = create((set) => ({
   clientInfo: {
     name: "",
     address: "",
-    date: new Date().toISOString().slice(0,10) ,
+    date: new Date().toISOString().slice(0, 10),
   },
-  handleClientInfoChange: (event) =>
-    set((state) => ({
-      clientInfo: handleClientInfoChange(state.clientInfo, event),
-    })),
-}));
+};
+
+// Creating store using zustand for state management
+
+const useStore = create(
+  persist(
+    (set) => ({
+      ...initialState,
+      // Only for Item State Management
+      addItem: () =>
+        set((state) => {
+          const updatedItems = addItem(state.items);
+          const { subtotal, gst, grandTotal } = calculateTotal(
+            updatedItems,
+            state.gstPercentage
+          );
+          return {
+            items: updatedItems,
+            subtotal,
+            gst,
+            grandTotal,
+          };
+        }),
+      handleItemInputChange: (id, field, value) =>
+        set((state) => {
+          const updatedItems = handleItemInputChange(
+            state.items,
+            id,
+            field,
+            value
+          );
+          const { subtotal, gst, grandTotal } = calculateTotal(
+            updatedItems,
+            state.gstPercentage
+          );
+          return {
+            items: updatedItems,
+            subtotal,
+            gst,
+            grandTotal,
+          };
+        }),
+      removeItem: (id: string) =>
+        set((state) => ({
+          items: removeItem(state.items, id),
+        })),
+      handleGSTInputChange: (event) =>
+        set((state) => {
+          const updatedGST = {
+            ...state.gstPercentage,
+            selectedOption: event.target.name,
+            percent: event.target.value,
+          };
+          console.log(updatedGST);
+          const { subtotal, gst, grandTotal } = calculateTotal(
+            state.items,
+            updatedGST
+          );
+          return { gstPercentage: updatedGST, subtotal, gst, grandTotal };
+        }),
+      handleItemContentsType: (value) =>
+        set((state) => {
+          return { ...state.itemContentsType, itemContentsType: value };
+        }),
+      handleClientInfoChange: (event) =>
+        set((state) => ({
+          clientInfo: handleClientInfoChange(state.clientInfo, event),
+        })),
+      reset: () => {
+        set(initialState);
+      },
+    }),
+    {
+      name: "quote-storage", // name of the item in the storage (must be unique)
+      storage: createJSONStorage(() => localStorage), // (optional) by default, 'localStorage' is used
+    }
+  )
+);
 
 export default useStore;
