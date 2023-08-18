@@ -23,7 +23,7 @@ const Form = () => {
     try {
       const a = document.createElement("a");
       a.href = url;
-      a.download = store.clientInfo.name.slice(0, 7) + store.clientInfo.date; // Change the file name here if needed
+      a.download = store.clientInfo.name.slice(0, 7) + store.clientInfo.date + ".pdf"; // Change the file name here if needed
       a.click();
       toast.success("PDF Downloaded");
     } catch {
