@@ -116,13 +116,13 @@ const styles = StyleSheet.create({
     textAlign: "left",
     borderTop: "1pt soild #000",
   },
-  rupeesInWords: {
-    // marginTop: -18,
-    marginLeft: "-9cm",
-
-    fontSize: 9,
+  inWordsContainer: {
+    width: "100%",
+    border: "none",
+    justifyContent: "flex-start",
+  },
+  rupeesInWordsHeading: {
     fontWeight: "semibold",
-    flexDirection: "row",
   },
   inWords: {
     fontWeight: "normal",
@@ -238,11 +238,9 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
                 <Text>Total</Text>
                 <Text>₹{grandTotal}</Text>
               </View>
-              <View style={styles.summary}>
-                <View style={styles.rupeesInWords}>
-                  <Text>Rupees:</Text>
-                  <Text style={styles.inWords}> {rupeesConvertedToWords}</Text>
-                </View>
+              <View style={[styles.summary, styles.inWordsContainer]}>
+                <Text style={styles.rupeesInWordsHeading}>Rupees:</Text>
+                <Text> {rupeesConvertedToWords}</Text>
               </View>
             </View>
           </View>

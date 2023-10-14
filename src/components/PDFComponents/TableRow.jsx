@@ -25,11 +25,14 @@ const styles = StyleSheet.create({
   },
   tableCell: {
     paddingVertical: 8,
+    paddingHorizontal: 4,
     fontSize: 10,
-    textAlign: "center",
   },
   rightAlignedCell: {
     textAlign: "right",
+  },
+  centerAlignedCell: {
+    textAlign: "center",
   },
 });
 const TableRow = ({ item, index, weightsPresent, qtyPresent }) => {
@@ -48,18 +51,20 @@ const TableRow = ({ item, index, weightsPresent, qtyPresent }) => {
           <Text style={styles.tableCell}>{item.itemName}</Text>
         </View>
         <View style={styles.priceCol}>
-          <Text style={styles.tableCell}>₹{item.price}</Text>
+          <Text style={[styles.tableCell, styles.centerAlignedCell]}>
+            ₹{item.price}
+          </Text>
         </View>
         {weightsPresent && (
           <View style={styles.qtyCol}>
-            <Text style={styles.tableCell}>
+            <Text style={[styles.tableCell, styles.centerAlignedCell]}>
               {isEmpty(item.weight) ? "" : item.weight}
             </Text>
           </View>
         )}
         {qtyPresent && (
           <View style={styles.qtyCol}>
-            <Text style={styles.tableCell}>
+            <Text style={[styles.tableCell, styles.centerAlignedCell]}>
               {isEmpty(item.qty === 0) ? "" : item.qty}
             </Text>
           </View>
