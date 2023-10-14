@@ -116,18 +116,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     borderTop: "1pt soild #000",
   },
-  rupeesInWords: {
-    marginTop: -18,
-    marginLeft: 10,
-    alignSelf: "flex-start",
-    fontSize: 9,
-    fontWeight: "semibold",
-    flex: 1,
-    flexDirection: "row",
-  },
-  inWords: {
-    fontWeight: "normal",
-  },
   removeBorder: {
     border: "none",
   },
@@ -190,9 +178,6 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
     const [day, month, year] = [d[2], d[1], d[0]];
     return `${day}-${month}-${year}`;
   };
-
-  const rupeesConvertedToWords = rupeesInWords.convert(grandTotal);
-
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
@@ -238,11 +223,6 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
               <View style={styles.summary}>
                 <Text>Total</Text>
                 <Text>₹{grandTotal}</Text>
-              </View>
-              <View style={styles.summary}></View>
-              <View style={styles.rupeesInWords}>
-                <Text>Rupees:</Text>
-                <Text style={styles.inWords}> {rupeesConvertedToWords}</Text>
               </View>
             </View>
           </View>
