@@ -202,13 +202,8 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
             style={styles.pageBackground}
           />
         )}
-        <View style={styles.mainPage}>
-          <HeaderSection
-            name={name}
-            address={address}
-            date={formatDate(date)}
-          />
-          <View style={styles.table}>
+        <HeaderSection name={name} address={address} date={formatDate(date)} />
+        {/* <View style={styles.table}>
             <TableHeader
               weightsPresent={weightsPresent}
               qtyPresent={qtyPresent}
@@ -243,9 +238,9 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
                 <Text> {rupeesConvertedToWords}</Text>
               </View>
             </View>
-          </View>
+          </View> */}
 
-          <View style={styles.footer}>
+        {/* <View style={styles.footer}>
             <View style={styles.tcContainer}>
               <Text style={styles.tcHead}>Terms & Conditions</Text>
               <View style={styles.tc}>
@@ -265,8 +260,7 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
             <View style={styles.signature}>
               <Text>Authorised Signature</Text>
             </View>
-          </View>
-        </View>
+          </View> */}
       </Page>
     </Document>
   );

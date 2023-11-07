@@ -2,16 +2,13 @@ import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
 const styles = StyleSheet.create({
   headerSection: {
-    maxHeight: 110,
     flex: 1,
     flexDirection: "column",
-
   },
   quotationAndDate: {
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
-
   },
   dateOfIssue: {
     fontSize: 11,
@@ -31,11 +28,39 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "center",
   },
+  w50: {
+    width: "50%",
+  },
+  w100: {
+    width: "100%",
+  },
+  flex: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+  },
+  centerText: {
+    textAlign: "center",
+  },
+  rightText: {
+    textAlign: "right",
+  },
 });
 const HeaderSection = ({ name, address, date }) => {
   return (
     <>
-      <View style={styles.headerSection}>
+      <View style={styles.flex}>
+        <View style={styles.w100}>
+          <Text style={[styles.centerText, styles.heading]}>Quotation</Text>
+        </View>
+      </View>
+      <View style={styles.flex}>
+        <View style={styles.w100}>
+          <Text style={styles.rightText}>14-05-2023</Text>
+        </View>
+      </View>
+
+      {/* <View style={styles.headerSection}>
         <View style={styles.quotationAndDate}>
           <Text>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</Text>
           <Text style={styles.heading}>Quotation</Text>
@@ -46,7 +71,7 @@ const HeaderSection = ({ name, address, date }) => {
           <Text>{name}</Text>
           <Text>{address}</Text>
         </View>
-      </View>
+      </View> */}
     </>
   );
 };
