@@ -14,14 +14,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     paddingRight: "5mm",
   },
-  customerDetails: {
-    flex: 1,
-    flexDirection: "column",
-    marginBottom: "6mm",
-    marginLeft: "20mm",
-    maxHeight: 150,
-    fontSize: 11,
-  },
   heading: {
     fontFamily: "Inter",
     fontSize: 16,
@@ -34,6 +26,18 @@ const styles = StyleSheet.create({
   w100: {
     width: "100%",
   },
+  mt10: {
+    marginTop: "10px",
+  },
+  mb10: {
+    marginBottom: "10px",
+  },
+  px40: {
+    paddingHorizontal: "40px",
+  },
+  pl100: {
+    paddingHorizontal: "100px",
+  },
   flex: {
     display: "flex",
     flexDirection: "row",
@@ -45,33 +49,36 @@ const styles = StyleSheet.create({
   rightText: {
     textAlign: "right",
   },
+  absolute: {
+    position: "absolute",
+  },
+  top48: {
+    top: "45mm",
+  },
+  top55: {
+    top: "55mm",
+  },
 });
 const HeaderSection = ({ name, address, date }) => {
   return (
     <>
-      <View style={styles.flex}>
+      <View style={[styles.flex, styles.absolute, styles.top48]}>
         <View style={styles.w100}>
           <Text style={[styles.centerText, styles.heading]}>Quotation</Text>
         </View>
       </View>
-      <View style={styles.flex}>
+      <View style={[styles.flex, styles.px40, styles.absolute, styles.top55]}>
         <View style={styles.w100}>
-          <Text style={styles.rightText}>14-05-2023</Text>
+          <Text style={[styles.rightText, styles.dateOfIssue]}>14-05-2023</Text>
         </View>
       </View>
 
-      {/* <View style={styles.headerSection}>
-        <View style={styles.quotationAndDate}>
-          <Text>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</Text>
-          <Text style={styles.heading}>Quotation</Text>
-          <Text style={styles.dateOfIssue}>{date}</Text>
-        </View>
-
-        <View style={styles.customerDetails}>
-          <Text>{name}</Text>
-          <Text>{address}</Text>
-        </View>
-      </View> */}
+      <View style={[styles.flex, styles.pl100]}>
+        <Text>{name}</Text>
+      </View>
+      <View style={[styles.flex, styles.pl100, styles.mb10]}>
+        <Text>{address}</Text>
+      </View>
     </>
   );
 };

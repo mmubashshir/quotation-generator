@@ -59,9 +59,10 @@ Font.register({
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 0,
-    flex: 1,
     fontFamily: "Inter",
+    fontSize: 11,
+    paddingBottom: "30mm",
+    paddingTop: "63mm",
   },
   mainPage: {
     flex: 1,
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
   table: {
     display: "table",
     width: "auto",
+    paddingHorizontal: "40px",
   },
   summaryContainer: {
     fontSize: 10,
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     width: "50%",
     textAlign: "right",
-    marginRight: 25,
+    right: "80px",
     alignSelf: "flex-end",
   },
   tcHead: {
@@ -165,6 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   pageBackground: {
+    display: "flex",
     position: "absolute",
     minWidth: "100%",
     minHeight: "100%",
@@ -172,6 +175,11 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     zIndex: -1,
+    // marginTop: "-48mm",
+    marginBottom: "270px",
+  },
+  mt55: {
+    marginTop: "48mm",
   },
 });
 
@@ -202,65 +210,66 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
             style={styles.pageBackground}
           />
         )}
+        {/* <View style={styles.mt55}></View> */}
         <HeaderSection name={name} address={address} date={formatDate(date)} />
-        {/* <View style={styles.table}>
-            <TableHeader
+        <View style={styles.table}>
+          <TableHeader
+            weightsPresent={weightsPresent}
+            qtyPresent={qtyPresent}
+          />
+          {items.map((item, index) => (
+            <TableRow
+              item={item}
+              index={index}
+              key={item.id}
               weightsPresent={weightsPresent}
               qtyPresent={qtyPresent}
             />
-            {items.map((item, index) => (
-              <TableRow
-                item={item}
-                index={index}
-                key={item.id}
-                weightsPresent={weightsPresent}
-                qtyPresent={qtyPresent}
-              />
-            ))}
-            <View style={styles.hline}></View>
-            <View style={styles.summaryContainer}>
-              <View style={[styles.summary, styles.removeBorder]}>
-                <Text>Sub Total</Text>
-                <Text>₹{subtotal}</Text>
-              </View>
-              {parseInt(gstPercentage.percent) !== 0 && (
-                <View style={styles.summary}>
-                  <Text>GST ({gstPercentage.percent}%)</Text>
-                  <Text>₹{gst}</Text>
-                </View>
-              )}
+          ))}
+          <View style={styles.hline}></View>
+          <View style={styles.summaryContainer}>
+            <View style={[styles.summary, styles.removeBorder]}>
+              <Text>Sub Total</Text>
+              <Text>₹{subtotal}</Text>
+            </View>
+            {parseInt(gstPercentage.percent) !== 0 && (
               <View style={styles.summary}>
-                <Text>Total</Text>
-                <Text>₹{grandTotal}</Text>
+                <Text>GST ({gstPercentage.percent}%)</Text>
+                <Text>₹{gst}</Text>
               </View>
-              <View style={[styles.summary, styles.inWordsContainer]}>
-                <Text style={styles.rupeesInWordsHeading}>Rupees:</Text>
-                <Text> {rupeesConvertedToWords}</Text>
-              </View>
+            )}
+            <View style={styles.summary}>
+              <Text>Total</Text>
+              <Text>₹{grandTotal}</Text>
             </View>
-          </View> */}
+            <View style={[styles.summary, styles.inWordsContainer]}>
+              <Text style={styles.rupeesInWordsHeading}>Rupees:</Text>
+              <Text> {rupeesConvertedToWords}</Text>
+            </View>
+          </View>
+        </View>
 
-        {/* <View style={styles.footer}>
-            <View style={styles.tcContainer}>
-              <Text style={styles.tcHead}>Terms & Conditions</Text>
-              <View style={styles.tc}>
-                <Text>
-                  • Above Information is not an invoice and only an estimate of
-                  goods/services
-                </Text>
-                <Text>
-                  • Payment will be due prior to provision or delivery of
-                  goods/services
-                </Text>
-                <Text>
-                  • Rates applicable on road transportation are charged extra
-                </Text>
-              </View>
+        <View style={styles.footer}>
+          <View style={styles.tcContainer}>
+            <Text style={styles.tcHead}>Terms & Conditions</Text>
+            <View style={styles.tc}>
+              <Text>
+                • Above Information is not an invoice and only an estimate of
+                goods/services
+              </Text>
+              <Text>
+                • Payment will be due prior to provision or delivery of
+                goods/services
+              </Text>
+              <Text>
+                • Rates applicable on road transportation are charged extra
+              </Text>
             </View>
-            <View style={styles.signature}>
-              <Text>Authorised Signature</Text>
-            </View>
-          </View> */}
+          </View>
+          <View style={styles.signature}>
+            <Text>Authorised Signature</Text>
+          </View>
+        </View>
       </Page>
     </Document>
   );
