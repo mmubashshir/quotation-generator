@@ -171,7 +171,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     minWidth: "100%",
     minHeight: "100%",
-    display: "block",
     height: "100%",
     width: "100%",
     zIndex: -1,
