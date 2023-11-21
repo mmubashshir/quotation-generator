@@ -20,14 +20,28 @@ export default function ViewPDF({ pdfURL }) {
     setNumPages(numPages);
   }
 
+  const getAllPages = () => {
+    let pages = [];
+    for (let i = 1; i <= numPages; i++) {
+      pages.push(
+        <>
+          <Page key={i} pageNumber={i} />
+          <div className="py-4 text-white text-center font-semibold">
+            <p>
+              Page {i} of {numPages}
+            </p>
+          </div>
+        </>
+      );
+    }
+    return pages;
+  };
+
   return (
     <div>
       <Document file={pdfURL} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page key={1} pageNumber={pageNumber} />
+        {getAllPages()}
       </Document>
-      {/* <p>
-        Page {pageNumber} of {numPages}
-      </p> */}
     </div>
   );
 }

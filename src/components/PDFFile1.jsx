@@ -116,6 +116,17 @@ const styles = StyleSheet.create({
     textAlign: "left",
     borderTop: "1pt soild #000",
   },
+  inWordsContainer: {
+    width: "100%",
+    border: "none",
+    justifyContent: "flex-start",
+  },
+  rupeesInWordsHeading: {
+    fontWeight: "semibold",
+  },
+  inWords: {
+    fontWeight: "normal",
+  },
   removeBorder: {
     border: "none",
   },
@@ -178,6 +189,9 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
     const [day, month, year] = [d[2], d[1], d[0]];
     return `${day}-${month}-${year}`;
   };
+
+  const rupeesConvertedToWords = rupeesInWords.convert(grandTotal);
+
   return (
     <Document>
       <Page size={"A4"} style={styles.page}>
@@ -248,6 +262,10 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
               <Text>Authorised Signature</Text>
             </View>
           </View>
+        </View>
+        <View style={[styles.summary, styles.inWordsContainer]}>
+          <Text style={styles.rupeesInWordsHeading}>Rupees:</Text>
+          <Text> {rupeesConvertedToWords}</Text>
         </View>
       </Page>
     </Document>

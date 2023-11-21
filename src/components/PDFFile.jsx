@@ -3,179 +3,68 @@ import {
   Text,
   View,
   Document,
-  StyleSheet,
   Image,
-  Font,
-} from "@react-pdf/renderer";
-import "../index.css";
-import { TableHeader } from "./PDFComponents/TableHeader";
-import { TableRow } from "./PDFComponents/TableRow";
-import { HeaderSection } from "./PDFComponents/HeaderSection";
-import isEmpty from "./checkEmpty";
-import pdfBackground from "../assets/PDFBackground.jpg";
-import rupeesInWords from "./rupeesInWords";
+} from "../components/PDFComponents/styles";
 
+import { Font } from "@react-pdf/renderer";
+import isEmpty from "./checkEmpty";
+import rupeesInWords from "./rupeesInWords";
+import topbar from "../assets/topbar.png";
+import head from "../assets/head.png";
+import totalBack from "../assets/totalBack.png";
 Font.register({
-  family: "Inter",
+  family: "Hanken Grotesk",
   fonts: [
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2da4fpNzXhRKA.ttf",
       fontWeight: 100,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyfMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Za4fpNzXhRKA.ttf",
       fontWeight: 200,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuOKfMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Nc7WZa4fpNzXhRKA.ttf",
       fontWeight: 300,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4fpNzXhRKA.ttf",
       fontWeight: 400,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuI6fMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4fpNzXhRKA.ttf",
       fontWeight: 500,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuGKYMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4fpNzXhRKA.ttf",
       fontWeight: 600,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4fpNzXhRKA.ttf",
       fontWeight: 700,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuDyYMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Fa4fpNzXhRKA.ttf",
       fontWeight: 800,
     },
     {
-      src: "https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuBWYMZhrib2Bg-4.ttf",
+      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcGmFa4fpNzXhRKA.ttf",
       fontWeight: 900,
     },
   ],
 });
 
-const styles = StyleSheet.create({
-  page: {
-    paddingTop: 0,
-    flex: 1,
-    fontFamily: "Inter",
-  },
-  mainPage: {
-    flex: 1,
-    paddingHorizontal: 35,
-    marginTop: "55mm",
-    zIndex: 0,
-  },
-  quotationReference: {
-    flex: 1,
-    marginTop: "-6mm",
-    marginLeft: "15mm",
-    marginBottom: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    maxHeight: 60,
-    fontSize: 14,
-  },
-  quotationNumber: {
-    fontSize: 28,
-    fontWeight: "600",
-  },
-  customerDetails: {
-    marginTop: "6mm",
-    maxHeight: 150,
-    flex: 1,
-  },
-  heading: {
-    fontFamily: "Inter",
-    fontSize: 16,
-    fontWeight: "600",
-    textAlign: "center",
-  },
-  table: {
-    display: "table",
-    width: "auto",
-  },
-  summaryContainer: {
-    fontSize: 10,
-    flex: 1,
-    flexDirection: "column",
-    gap: 20,
-    alignItems: "flex-end",
-    justifyContent: "flex-start",
-  },
-  summary: {
-    paddingTop: 9,
-    width: 250,
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    // alignItems: "center",
-    textAlign: "left",
-    borderTop: "1pt soild #000",
-  },
-  inWordsContainer: {
-    width: "100%",
-    border: "none",
-    justifyContent: "flex-start",
-  },
-  rupeesInWordsHeading: {
-    fontWeight: "semibold",
-  },
-  inWords: {
-    fontWeight: "normal",
-  },
-  removeBorder: {
-    border: "none",
-  },
-  hline: {
-    width: "100%",
-    height: 1,
-    backgroundColor: "#000",
-  },
-  footer: {
-    position: "absolute",
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    bottom: "32mm",
-    left: 43,
-    fontSize: 8,
-    maxWidth: "100%",
-  },
-  tcContainer: {
-    width: "50%",
-    textAlign: "justify",
-    gap: "1mm",
-  },
-  signature: {
-    fontWeight: "600",
-    width: "50%",
-    textAlign: "right",
-    marginRight: 25,
-    alignSelf: "flex-end",
-  },
-  tcHead: {
-    fontWeight: "600",
-  },
-  tc: {
-    flex: 1,
-    flexDirection: "column",
-  },
-  pageBackground: {
-    position: "absolute",
-    minWidth: "100%",
-    minHeight: "100%",
-    display: "block",
-    height: "100%",
-    width: "100%",
-    zIndex: -1,
-  },
+Font.register({
+  family: "Schibsted Grotesk",
+  fonts: [
+    {
+      src: "http://fonts.gstatic.com/s/schibstedgrotesk/v3/JqzK5SSPQuCQF3t8uOwiUL-taUTtarVKQ9vZ6pJJWlMNIsEAT8JuXFGVOQ.ttf",
+      fontWeight: 400,
+    },
+  ],
 });
 
-const PDFFile = ({ pdfData, getFullLetterHead }) => {
+const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
@@ -189,87 +78,146 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
     const [day, month, year] = [d[2], d[1], d[0]];
     return `${day}-${month}-${year}`;
   };
-
-  const rupeesConvertedToWords = rupeesInWords.convert(grandTotal);
-
   return (
     <Document>
-      <Page size={"A4"} style={styles.page}>
-        {getFullLetterHead && (
-          <Image
-            fixed={true}
-            src={pdfBackground}
-            style={styles.pageBackground}
-          />
-        )}
-        <View style={styles.mainPage}>
-          <HeaderSection
-            name={name}
-            address={address}
-            date={formatDate(date)}
-          />
-          <View style={styles.table}>
-            <TableHeader
-              weightsPresent={weightsPresent}
-              qtyPresent={qtyPresent}
-            />
-            {items.map((item, index) => (
-              <TableRow
-                item={item}
-                index={index}
-                key={item.id}
-                weightsPresent={weightsPresent}
-                qtyPresent={qtyPresent}
-              />
-            ))}
-            <View style={styles.hline}></View>
-            <View style={styles.summaryContainer}>
-              <View style={[styles.summary, styles.removeBorder]}>
-                <Text>Sub Total</Text>
-                <Text>₹{subtotal}</Text>
-              </View>
-              {parseInt(gstPercentage.percent) !== 0 && (
-                <View style={styles.summary}>
-                  <Text>GST ({gstPercentage.percent}%)</Text>
-                  <Text>₹{gst}</Text>
-                </View>
-              )}
-              <View style={styles.summary}>
-                <Text>Total</Text>
-                <Text>₹{grandTotal}</Text>
-              </View>
-              <View style={[styles.summary, styles.inWordsContainer]}>
-                <Text style={styles.rupeesInWordsHeading}>Rupees:</Text>
-                <Text> {rupeesConvertedToWords}</Text>
-              </View>
-            </View>
-          </View>
+      <Page>
+        <Image className="flex top" value={topbar} fixed={true} />
+        <Image className="flex -mt-35" value={head} />
 
-          <View style={styles.footer}>
-            <View style={styles.tcContainer}>
-              <Text style={styles.tcHead}>Terms & Conditions</Text>
-              <View style={styles.tc}>
-                <Text>
-                  • Above Information is not an invoice and only an estimate of
-                  goods/services
-                </Text>
-                <Text>
-                  • Payment will be due prior to provision or delivery of
-                  goods/services
-                </Text>
-                <Text>
-                  • Rates applicable on road transportation are charged extra
-                </Text>
-              </View>
+        <View className="flex right px-25 pt-10">
+          <Text className="w-100 bold paddingNone">GST: 340329840948</Text>
+        </View>
+
+        <View className="flex items-center px-25">
+          <View className="w-50">
+            <Text className="light paddingNone">INVOICE TO</Text>
+            <Text className="medium fs-20 paddingNone">
+              {name.toUpperCase()}
+            </Text>
+          </View>
+          <View className="w-50 ">
+            <Text className="fs-45 right semibold paddingNone">INVOICE</Text>
+          </View>
+        </View>
+
+        <View className="flex px-25 py-10">
+          <View className="w-50 fs-10 light gap-2">
+            {address.split("\n").map((item, index) => (
+              <Text className="paddingNone" key={index}>
+                {item}
+              </Text>
+            ))}
+            {/* <Text className="paddingNone">Manager Fauget Company</Text>
+            <Text className="paddingNone">Phone: +123-456-7890</Text>
+            <Text className="paddingNone">
+              Email: hello@reallygreatsite.com
+            </Text> */}
+          </View>
+          <View className="w-50 fs-10 gap-2 right">
+            <Text className="paddingNone">Invoice Number: #002</Text>
+            <Text className="paddingNone">Invoice Date: {date}</Text>
+            <Text className="paddingNone">Due Date: {date}</Text>
+          </View>
+        </View>
+
+        <View className="flex">
+          <Image className="h-40 back w-100" value={topbar} />
+          <View className="flex white items-center center h-40 medium px-25 gap-5 fs-14">
+            <View className="w-60">
+              <Text>{"Product Description".toUpperCase()}</Text>
             </View>
-            <View style={styles.signature}>
-              <Text>Authorised Signature</Text>
+            <View className=" w-15">
+              <Text>PRICE</Text>
+            </View>
+            <View className="  w-10">
+              <Text>QTY</Text>
+            </View>
+            <View className=" w-15">
+              <Text className="right">TOTAL</Text>
             </View>
           </View>
         </View>
+
+        {items?.map((item) => (
+          <View className="flex items-center center py-5 row light  fs-10 px-25 gap-5 ">
+            <View className="w-60">
+              <Text>{item.itemName}</Text>
+            </View>
+            <View className=" w-15">
+              <Text>Rs {item.price}</Text>
+            </View>
+            <View className="  w-10">
+              <Text>{item.qty}</Text>
+            </View>
+            <View className=" w-15">
+              <Text className="right">₹ {item.price * item.qty}</Text>
+            </View>
+          </View>
+        ))}
+        <View wrap={false}>
+          <View className="flex gap-5 px-25 light">
+            <View className="w-68"></View>
+            <View className="w-17">
+              <Text>Subtotal</Text>
+            </View>
+            <View className="w-15">
+              <Text className="right">₹{subtotal}</Text>
+            </View>
+          </View>
+
+          <View className="flex gap-5 px-25 light">
+            <View className="w-68"></View>
+            <View className="w-17">
+              <Text>Discount</Text>
+            </View>
+            <View className="w-15">
+              <Text className="right">₹100</Text>
+            </View>
+          </View>
+
+          <View className="flex gap-5 px-25 light">
+            <View className="w-68">Hello</View>
+            <View className="w-17">
+              <Text>GST({gstPercentage.percent}%)</Text>
+            </View>
+            <View className="w-15">
+              <Text className="right">₹{gst}</Text>
+            </View>
+          </View>
+
+          <View className="flex items-center mt-10 h-40 px-25 white">
+            <View className="w-68 dark pr-20">
+              <Text className="semibold fs-15">Rupees(in words)</Text>
+              <Text className="fs-10 light">
+                One Thousand two hundred sixty only
+              </Text>
+            </View>
+            <Image className="w-40 h-40 back right-0" value={totalBack} />
+            <View className="w-16 ">
+              <Text>Total</Text>
+            </View>
+            <View className="w-16 right">
+              <Text>₹{grandTotal}</Text>
+            </View>
+          </View>
+        </View>
+        <View wrap={false} className="flex px-25 pt-10 ">
+          <View className="w-80 light fs-10">
+            <Text className="semibold fs-18">TERMS & CONDITIONS</Text>
+            <Text className="pl-5"> • Lorem ipsum dolor sit amet.</Text>
+            <Text className="pl-5"> • Lorem ipsum dolor sit amet.</Text>
+            <Text className="pl-5"> • Lorem ipsum dolor sit amet.</Text>
+          </View>
+          <View className="w-20 medium gap-5 items-end">
+            <Text className="row paddingNone border-dark"></Text>
+            <Text className="center paddingNone">Authorized Signature</Text>
+          </View>
+        </View>
+
+        <Image fixed={true} className="flex bottom" value={topbar} />
       </Page>
     </Document>
   );
 };
 
-export default PDFFile;
+export default PDFFile1;
