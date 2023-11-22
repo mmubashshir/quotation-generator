@@ -154,7 +154,7 @@ const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
             </View>
           </View>
         ))}
-        <View wrap={false}>
+        <View wrap={true}>
           <View className="flex gap-5 px-25 light">
             <View className="w-68"></View>
             <View className="w-17">
