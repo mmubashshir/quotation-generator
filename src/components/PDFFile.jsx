@@ -5,7 +5,6 @@ import {
   Document,
   Image,
 } from "../components/PDFComponents/styles";
-
 import { Font } from "@react-pdf/renderer";
 import isEmpty from "./checkEmpty";
 import rupeesInWords from "./rupeesInWords";
@@ -16,39 +15,39 @@ Font.register({
   family: "Hanken Grotesk",
   fonts: [
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2da4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2da4fpNzXhRKA.ttf",
       fontWeight: 100,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Za4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Za4fpNzXhRKA.ttf",
       fontWeight: 200,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Nc7WZa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Nc7WZa4fpNzXhRKA.ttf",
       fontWeight: 300,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_Ncs2Za4fpNzXhRKA.ttf",
       fontWeight: 400,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcgWZa4fpNzXhRKA.ttf",
       fontWeight: 500,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcbWFa4fpNzXhRKA.ttf",
       fontWeight: 600,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcVGFa4fpNzXhRKA.ttf",
       fontWeight: 700,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Fa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcM2Fa4fpNzXhRKA.ttf",
       fontWeight: 800,
     },
     {
-      src: "http://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcGmFa4fpNzXhRKA.ttf",
+      src: "https://fonts.gstatic.com/s/hankengrotesk/v8/ieVq2YZDLWuGJpnzaiwFXS9tYvBRzyFLlZg_f_NcGmFa4fpNzXhRKA.ttf",
       fontWeight: 900,
     },
   ],
@@ -58,13 +57,13 @@ Font.register({
   family: "Schibsted Grotesk",
   fonts: [
     {
-      src: "http://fonts.gstatic.com/s/schibstedgrotesk/v3/JqzK5SSPQuCQF3t8uOwiUL-taUTtarVKQ9vZ6pJJWlMNIsEAT8JuXFGVOQ.ttf",
+      src: "https://fonts.gstatic.com/s/schibstedgrotesk/v3/JqzK5SSPQuCQF3t8uOwiUL-taUTtarVKQ9vZ6pJJWlMNIsEAT8JuXFGVOQ.ttf",
       fontWeight: 400,
     },
   ],
 });
 
-const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
+const PDFFile = ({ pdfData, getFullLetterHead }) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
@@ -176,7 +175,9 @@ const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
           </View>
 
           <View className="flex gap-5 px-25 light">
-            <View className="w-68">Hello</View>
+            <View className="w-68">
+              <Text>Hello</Text>
+            </View>
             <View className="w-17">
               <Text>GST({gstPercentage.percent}%)</Text>
             </View>
@@ -220,4 +221,4 @@ const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
   );
 };
 
-export default PDFFile1;
+export default PDFFile;

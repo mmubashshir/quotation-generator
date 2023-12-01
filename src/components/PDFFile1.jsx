@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const PDFFile = ({ pdfData, getFullLetterHead }) => {
+const PDFFile1 = ({ pdfData, getFullLetterHead }) => {
   const { name, date, address } = pdfData.clientInfo;
   const { subtotal, gst, grandTotal, gstPercentage } = pdfData;
   const items = pdfData.items;
@@ -272,4 +272,4 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
   );
 };
 
-export default PDFFile;
+export default PDFFile1;
