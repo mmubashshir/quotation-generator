@@ -69,7 +69,7 @@ const HeaderSection = ({ name, address, date }) => {
       </View>
       <View style={[styles.flex, styles.px40, styles.absolute, styles.top55]}>
         <View style={styles.w100}>
-          <Text style={[styles.rightText, styles.dateOfIssue]}>14-05-2023</Text>
+          <Text style={[styles.rightText, styles.dateOfIssue]}>{date}</Text>
         </View>
       </View>
 
