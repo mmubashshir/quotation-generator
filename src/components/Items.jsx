@@ -23,7 +23,7 @@ const Items = () => {
             return (
               <div key={item.id} className="flex gap-2">
                 <input
-                  className="text-sm mt-1 p-3 w-5/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
+                  className="text-sm mt-1 p-3 w-4/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
                   name="itemName"
                   type="text"
                   value={item.itemName}
@@ -35,7 +35,8 @@ const Items = () => {
                       e.target.value
                     )
                   }
-                  required
+                  // contentEditable
+                  // required
                 />
                 <input
                   className="text-sm mt-1 p-3 w-3/12 rounded-xl bg-gray-100 focus:outline-none ring-2 ring-transparent focus:ring-blue-600"
