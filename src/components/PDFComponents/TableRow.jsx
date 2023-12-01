@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 const TableRow = ({ item, index, weightsPresent, qtyPresent }) => {
   return (
     <>
-      <View wrap={false} style={styles.tableRow}>
+      <View style={styles.tableRow}>
         <View style={styles.snoCol}>
           <Text style={styles.tableCell}>{index + 1}</Text>
         </View>

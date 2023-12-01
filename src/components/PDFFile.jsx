@@ -212,23 +212,21 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
         {/* <View style={styles.mt55}></View> */}
         <HeaderSection name={name} address={address} date={formatDate(date)} />
         <View style={styles.table}>
-          <View wrap={false}>
-            <TableHeader
+          <TableHeader
+            weightsPresent={weightsPresent}
+            qtyPresent={qtyPresent}
+          />
+          {items.map((item, index) => (
+            <TableRow
+              item={item}
+              index={index}
+              key={item.id}
               weightsPresent={weightsPresent}
               qtyPresent={qtyPresent}
             />
-            {items.map((item, index) => (
-              <TableRow
-                item={item}
-                index={index}
-                key={item.id}
-                weightsPresent={weightsPresent}
-                qtyPresent={qtyPresent}
-              />
-            ))}
-            <View style={styles.hline}></View>
-          </View>
-          <View wrap={false} style={styles.summaryContainer}>
+          ))}
+          <View style={styles.hline}></View>
+          <View style={styles.summaryContainer}>
             <View style={[styles.summary, styles.removeBorder]}>
               <Text>Sub Total</Text>
               <Text>₹{subtotal}</Text>
@@ -250,7 +248,7 @@ const PDFFile = ({ pdfData, getFullLetterHead }) => {
           </View>
         </View>
 
-        <View wrap={false} style={styles.footer}>
+        <View style={styles.footer}>
           <View style={styles.tcContainer}>
             <Text style={styles.tcHead}>Terms & Conditions</Text>
             <View style={styles.tc}>
