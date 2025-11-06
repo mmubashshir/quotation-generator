@@ -1,42 +1,31 @@
 import useStore from "../store";
+import { Drawer } from '@mui/material';
 
 const GSTButton = () => {
   const store = useStore((state) => state);
-
+  const gstPercentage = {
+    18: "GST18",
+    12: "GST12",
+    5: "GST5",
+    0: "NOGST"
+  }
   return (
     <>
       <div className="mydict">
         <div>
-          <label>
-            <input
-              type="radio"
-              name="GST12"
-              value={12}
-              checked={store.gstPercentage.selectedOption === "GST12"}
-              onChange={(e) => store.handleGSTInputChange(e)}
-            />
-            <span>12%</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="GST18"
-              value={18}
-              checked={store.gstPercentage.selectedOption === "GST18"}
-              onChange={(e) => store.handleGSTInputChange(e)}
-            />
-            <span>18%</span>
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="NOGST"
-              value={0}
-              checked={store.gstPercentage.selectedOption === "NOGST"}
-              onChange={(e) => store.handleGSTInputChange(e)}
-            />
-            <span>0%</span>
-          </label>
+          {Object.entries(gstPercentage).map(([key, value]) => (
+            <label>
+              <input
+                type="radio"
+                key={key}
+                name= {value}
+                value={key}
+                checked={store.gstPercentage.selectedOption === value}
+                onChange={(e) => store.handleGSTInputChange(e)}
+              />
+              <span>{key}%</span>
+            </label>
+          ))}
         </div>
       </div>
     </>
